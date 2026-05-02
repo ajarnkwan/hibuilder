@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Glossary — คำศัพท์ในคอร์ส · Hi, Builder</title>
+<meta name="description" content="คำศัพท์ใน Hi, Builder · 16 คำพร้อมคำอธิบายและตัวอย่าง">
+<meta property="og:title" content="Glossary · Hi, Builder">
+<meta property="og:description" content="คำศัพท์ใน Hi, Builder · 16 คำพร้อมคำอธิบายและตัวอย่าง">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Glossary · Hi, Builder">
+<meta name="twitter:description" content="คำศัพท์ใน Hi, Builder · 16 คำพร้อมคำอธิบายและตัวอย่าง">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --moss: #5a6b3d;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    padding: 56px 0 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--terra);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: inline-block;
+    border: 1px solid var(--terra);
+    padding: 6px 14px;
+    transform: rotate(-1deg);
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+  .hero p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .search-box {
+    margin: 24px auto 0;
+    max-width: 460px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    font-family: inherit;
+    font-size: 0.96rem;
+    color: var(--ink);
+  }
+  .search-input:focus { outline: none; border-color: var(--terra); }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-faded);
+    pointer-events: none;
+  }
+
+  /* Category nav */
+  .category-nav {
+    margin: 32px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cat-link {
+    padding: 8px 16px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    transition: all 0.12s;
+  }
+  .cat-link:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  /* Section */
+  .glossary-section {
+    margin: 48px 0;
+  }
+  .glossary-section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .glossary-section-head .icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .glossary-section-head h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .glossary-section-head .count {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+  }
+
+  .term-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .term-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 24px;
+    scroll-margin-top: 80px;
+  }
+  .term-card.highlight-target {
+    border-color: var(--terra);
+    border-width: 2px;
+    box-shadow: 4px 4px 0 var(--terra);
+    animation: highlight-pulse 1.2s ease-in-out;
+  }
+  @keyframes highlight-pulse {
+    0%, 100% { background: var(--paper); }
+    40% { background: rgba(244, 224, 136, 0.4); }
+  }
+  .term-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--terra-deep);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .term-pronounce {
+    font-size: 0.84rem;
+    color: var(--ink-faded);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .term-def {
+    color: var(--ink);
+    font-size: 0.98rem;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .term-def strong { background: var(--highlight); padding: 0 4px; font-weight: 500; }
+  .term-example {
+    padding: 10px 14px;
+    background: var(--cream-deep);
+    border-left: 2px solid var(--terra);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .term-example strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terra);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .term-meta {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .term-meta a { color: var(--terra); text-decoration: underline; }
+  .term-meta a:hover { color: var(--terra-deep); }
+
+  .empty-state {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--ink-faded);
+    font-size: 0.95rem;
+    display: none;
+  }
+  .empty-state.show { display: block; }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="Hi-Builder_botreuan-1.html">บทเรียน 1</a></div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <span class="hero-tagline">📖 GLOSSARY</span>
+    <h1>คำศัพท์ในคอร์ส</h1>
+    <p>คำใหม่ที่อาจเจอตลอดคอร์ส — เปิดมาดูเมื่อต้องการ ไม่จำเป็นต้องจำหมด</p>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="ค้นหาคำศัพท์...">
+    </div>
+
+    <div class="category-nav">
+      <a href="#html-code" class="cat-link">🦴 HTML/Code</a>
+      <a href="#github" class="cat-link">📦 GitHub</a>
+      <a href="#web" class="cat-link">🌐 Web</a>
+      <a href="#storage" class="cat-link">💾 Storage</a>
+      <a href="#concept" class="cat-link">💡 Concept</a>
+    </div>
+  </section>
+
+  <!-- ============= HTML/CODE ============= -->
+  <section class="glossary-section" id="html-code">
+    <div class="glossary-section-head">
+      <span class="icon">🦴</span>
+      <h2>HTML / Code</h2>
+      <span class="count">5 คำ</span>
+    </div>
+    <div class="term-grid">
+
+      <div class="term-card" id="term-html" data-term="html">
+        <div class="term-name">HTML</div>
+        <div class="term-pronounce">เอช-ที-เอ็ม-แอล · HyperText Markup Language</div>
+        <div class="term-def">ภาษาที่ใช้บอกว่า <strong>"เว็บมีอะไร"</strong> — เป็น "โครงกระดูก" ของหน้าเว็บ บอกว่ามีหัวข้อ ย่อหน้า รูป ปุ่ม อะไรบ้าง อยู่ตรงไหน</div>
+        <div class="term-example">
+          <strong>เปรียบเทียบ</strong>
+          เหมือน "เมนูในร้านอาหาร" — บอกว่าร้านมีอะไร ขาย ไม่ได้ตกแต่ง
+        </div>
+        <div class="term-meta">เจอใน: Step 1.6, 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-css" data-term="css">
+        <div class="term-name">CSS</div>
+        <div class="term-pronounce">ซี-เอส-เอส · Cascading Style Sheets</div>
+        <div class="term-def">ภาษาที่ใช้ <strong>"แต่งเว็บให้สวย"</strong> — กำหนดสี ฟอนต์ ระยะห่าง ขนาด เลย์เอาต์</div>
+        <div class="term-example">
+          <strong>เปรียบเทียบ</strong>
+          เหมือน "การตกแต่งร้าน" — สี ป้าย พื้น โต๊ะ
+        </div>
+        <div class="term-meta">เจอใน: Step 1.6</div>
+      </div>
+
+      <div class="term-card" id="term-js" data-term="js javascript">
+        <div class="term-name">JS (JavaScript)</div>
+        <div class="term-pronounce">เจ-เอส · ภาษาโปรแกรม</div>
+        <div class="term-def">ภาษาที่ทำให้เว็บ <strong>"เคลื่อนไหวและตอบโต้"</strong> — กดปุ่มแล้วเกิดอะไรขึ้น คำนวณตัวเลข บันทึกข้อมูล</div>
+        <div class="term-example">
+          <strong>เปรียบเทียบ</strong>
+          เหมือน "การสั่งอาหาร" — ลูกค้ากด → แม่ครัวทำตาม
+        </div>
+        <div class="term-meta">เจอใน: Step 1.6</div>
+      </div>
+
+      <div class="term-card" id="term-tag" data-term="tag">
+        <div class="term-name">Tag</div>
+        <div class="term-pronounce">แท็ก · ป้ายชื่อใน HTML</div>
+        <div class="term-def">ของในวงเล็บมุม <code style="font-family: 'IBM Plex Mono', monospace; background: var(--cream-deep); padding: 1px 4px;">&lt; &gt;</code> ที่บอกว่าส่วนนี้คืออะไร — เช่น <code style="font-family: 'IBM Plex Mono', monospace; background: var(--cream-deep); padding: 1px 4px;">&lt;h1&gt;</code> = หัวข้อใหญ่, <code style="font-family: 'IBM Plex Mono', monospace; background: var(--cream-deep); padding: 1px 4px;">&lt;p&gt;</code> = ย่อหน้า — Tag <strong>เปิดต้องปิด</strong> เป็นคู่</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          &lt;h1&gt;สวัสดี&lt;/h1&gt; — เปิด h1, ปิด /h1
+        </div>
+        <div class="term-meta">เจอใน: Step 1.6, 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-indexhtml" data-term="indexhtml index">
+        <div class="term-name">index.html</div>
+        <div class="term-pronounce">ชื่อไฟล์ HTML "หน้าหลัก"</div>
+        <div class="term-def">ชื่อไฟล์ที่ <strong>เซิร์ฟเวอร์/GitHub Pages เปิดเป็นค่าเริ่มต้น</strong> เมื่อมีคนเข้า URL — เหมือน "หน้าแรก" ของเว็บ ถ้าตั้งชื่อไฟล์อย่างอื่น URL ต้องเรียกชื่อนั้นต่อท้าย</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          mybuilder.github.io → เปิดไฟล์ index.html อัตโนมัติ
+        </div>
+        <div class="term-meta">เจอใน: Step 1.7</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= GITHUB ============= -->
+  <section class="glossary-section" id="github">
+    <div class="glossary-section-head">
+      <span class="icon">📦</span>
+      <h2>GitHub</h2>
+      <span class="count">5 คำ</span>
+    </div>
+    <div class="term-grid">
+
+      <div class="term-card" id="term-repo" data-term="repo repository">
+        <div class="term-name">Repo (Repository)</div>
+        <div class="term-pronounce">เร-โป · "โฟลเดอร์โปรเจกต์"</div>
+        <div class="term-def">"<strong>โฟลเดอร์โปรเจกต์</strong>" บน GitHub — เก็บไฟล์ทุกไฟล์ของเว็บเดียวไว้ด้วยกัน 1 เว็บ = 1 repo</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          repo ชื่อ "mybuilder.github.io" เก็บ index.html, README.md ไว้
+        </div>
+        <div class="term-meta">เจอใน: Step 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-commit" data-term="commit">
+        <div class="term-name">Commit</div>
+        <div class="term-pronounce">คอมมิต · "บันทึกประวัติ"</div>
+        <div class="term-def">บันทึก/save การเปลี่ยนแปลงเข้า repo — <strong>มี history ดูย้อนได้</strong> เปลี่ยนใจเปลี่ยนกลับได้ ไม่เหมือน Save ทั่วไป</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          commit ครั้งที่ 1: "เพิ่มไฟล์ index.html"<br>
+          commit ครั้งที่ 2: "แก้สีหัวข้อเป็นน้ำเงิน"
+        </div>
+        <div class="term-meta">เจอใน: Step 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-deploy" data-term="deploy">
+        <div class="term-name">Deploy</div>
+        <div class="term-pronounce">ดี-พลอย · "ปล่อยขึ้นเว็บ"</div>
+        <div class="term-def"><strong>ปล่อยเว็บออกสู่อินเทอร์เน็ต</strong> ให้คนทั่วไปเข้าถึงได้ — บน GitHub Pages เกิดอัตโนมัติหลัง commit ใช้เวลา 1-2 นาที</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          เพิ่ง commit เสร็จ → รอ 1 นาที → เว็บ live ที่ mybuilder.github.io
+        </div>
+        <div class="term-meta">เจอใน: Step 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-githubpages" data-term="githubpages github-pages">
+        <div class="term-name">GitHub Pages</div>
+        <div class="term-pronounce">บริการของ GitHub</div>
+        <div class="term-def">บริการ <strong>โฮสต์เว็บฟรี</strong> ของ GitHub — ใส่ HTML/CSS/JS ลง repo → เปิดเป็นเว็บได้ทันที ใช้ตลอดคอร์ส Hi, Builder</div>
+        <div class="term-example">
+          <strong>ข้อจำกัด</strong>
+          เก็บได้แค่ไฟล์ static (HTML/CSS/JS/รูป) — ทำ database/backend ไม่ได้
+        </div>
+        <div class="term-meta">เจอใน: Step 1.4, 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-readme" data-term="readme">
+        <div class="term-name">README</div>
+        <div class="term-pronounce">อ่านมี · "อ่านก่อน"</div>
+        <div class="term-def">ไฟล์ <strong>คำอธิบาย</strong>ของ repo — เป็นไฟล์แรกที่คนอื่นเห็นเมื่อเข้ามา ปกติเขียนด้วย Markdown (.md)</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          # เว็บของฉัน<br>
+          เว็บ checklist ของขายของซื้อ สร้างจากคอร์ส Hi, Builder
+        </div>
+        <div class="term-meta">เจอใน: Step 1.7</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= WEB ============= -->
+  <section class="glossary-section" id="web">
+    <div class="glossary-section-head">
+      <span class="icon">🌐</span>
+      <h2>Web</h2>
+      <span class="count">3 คำ</span>
+    </div>
+    <div class="term-grid">
+
+      <div class="term-card" id="term-url" data-term="url">
+        <div class="term-name">URL</div>
+        <div class="term-pronounce">ยู-อาร์-แอล · ที่อยู่ของเว็บ</div>
+        <div class="term-def"><strong>"ที่อยู่"</strong>ของหน้าเว็บบนอินเทอร์เน็ต — เหมือนที่อยู่ของบ้าน พิมพ์ใน browser แล้วไปหน้านั้นได้</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          https://mybuilder.github.io
+        </div>
+        <div class="term-meta">เจอใน: ทุก Step</div>
+      </div>
+
+      <div class="term-card" id="term-hosting" data-term="hosting">
+        <div class="term-name">Hosting</div>
+        <div class="term-pronounce">โฮสติ้ง · "ที่ตั้งของเว็บ"</div>
+        <div class="term-def">บริการ <strong>เก็บไฟล์เว็บไว้บนเซิร์ฟเวอร์</strong> ที่เปิด 24 ชั่วโมง คนเข้าได้จากที่ไหนก็ได้ — ปกติเสียเงิน แต่ GitHub Pages ฟรี</div>
+        <div class="term-example">
+          <strong>เปรียบเทียบ</strong>
+          เหมือนเช่าที่เปิดร้าน — ที่ถูก ที่ราคาดี ที่ฟรี
+        </div>
+        <div class="term-meta">เจอใน: Step 1.2, 1.4</div>
+      </div>
+
+      <div class="term-card" id="term-browser" data-term="browser">
+        <div class="term-name">Browser</div>
+        <div class="term-pronounce">เบราว์เซอร์ · "ตัวเปิดเว็บ"</div>
+        <div class="term-def">โปรแกรมที่ใช้ <strong>เปิดเว็บ</strong> เช่น Chrome, Safari, Edge, Firefox — เป็นตัวกลางที่อ่าน HTML/CSS/JS แล้วแสดงผลให้ผู้ใช้</div>
+        <div class="term-example">
+          <strong>ที่พบบ่อย</strong>
+          Chrome (ทั่วไป), Safari (iPhone/Mac), Edge (Windows)
+        </div>
+        <div class="term-meta">เจอใน: Step 1.2, 1.4, 1.7</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= STORAGE ============= -->
+  <section class="glossary-section" id="storage">
+    <div class="glossary-section-head">
+      <span class="icon">💾</span>
+      <h2>Storage</h2>
+      <span class="count">2 คำ</span>
+    </div>
+    <div class="term-grid">
+
+      <div class="term-card" id="term-localstorage" data-term="localstorage">
+        <div class="term-name">localStorage</div>
+        <div class="term-pronounce">โลคอลสตอเรจ · "ที่เก็บในเบราว์เซอร์"</div>
+        <div class="term-def">ช่องเก็บข้อมูลใน <strong>เบราว์เซอร์ของผู้ใช้</strong> — ของไม่หายเมื่อปิดหน้า แต่หายถ้า clear cache หรือเปลี่ยนเครื่อง</div>
+        <div class="term-example">
+          <strong>ใช้กับอะไร</strong>
+          เก็บ Asset Map (Step 1.5), เก็บ checklist ของผู้ใช้ — เปิดมาดูใหม่ได้
+        </div>
+        <div class="term-meta">เจอใน: Step 1.2, 1.5, 1.7</div>
+      </div>
+
+      <div class="term-card" id="term-json" data-term="json">
+        <div class="term-name">JSON</div>
+        <div class="term-pronounce">เจ-สัน · รูปแบบเก็บข้อมูล</div>
+        <div class="term-def">รูปแบบไฟล์ <strong>เก็บข้อมูลแบบมีโครง</strong> — มนุษย์อ่านได้ คอมพิวเตอร์เข้าใจ ใช้ส่งข้อมูลระหว่างเว็บกับเซิร์ฟเวอร์</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          { "name": "ป้านิด", "skill": ["ส้มตำ", "คุยลูกค้า"] }
+        </div>
+        <div class="term-meta">เจอใน: Step 1.5 (download Asset Map)</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= CONCEPT ============= -->
+  <section class="glossary-section" id="concept">
+    <div class="glossary-section-head">
+      <span class="icon">💡</span>
+      <h2>Concept</h2>
+      <span class="count">3 คำ</span>
+    </div>
+    <div class="term-grid">
+
+      <div class="term-card" id="term-prompt" data-term="prompt">
+        <div class="term-name">Prompt</div>
+        <div class="term-pronounce">พรอมป์ต · "คำสั่งให้ AI"</div>
+        <div class="term-def">ข้อความที่พวกเรา <strong>พิมพ์/พูดให้ AI</strong> — เป็น "คำสั่ง + คำถาม + บริบท" ที่ AI ใช้ตอบ <em>คุณภาพ prompt ดี = คำตอบดี</em></div>
+        <div class="term-example">
+          <strong>Prompt ห่วย</strong>
+          "ช่วยทำเว็บให้หน่อย"
+          <br><br>
+          <strong>Prompt ดี</strong>
+          "ช่วยทำเว็บ HTML 1 ไฟล์ — checklist 5 ข้อ ติ๊กได้ ใช้บนมือถือ"
+        </div>
+        <div class="term-meta">เจอใน: Step 1.3, 1.7 — เรียนลึกในบทเรียน 2</div>
+      </div>
+
+      <div class="term-card" id="term-asset" data-term="asset">
+        <div class="term-name">Asset</div>
+        <div class="term-pronounce">แอสเสท · "ทุนของ Builder"</div>
+        <div class="term-def">"<strong>ทุน/สินทรัพย์</strong>" ในความหมายของ Builder — สิ่งที่คุณมีอยู่แล้ว ที่จะใช้สร้างของได้ ทั้งความรู้ ทักษะ Network และประสบการณ์ — ไม่จำเป็นต้องเป็นเงินหรือของจับต้องได้</div>
+        <div class="term-example">
+          <strong>ตัวอย่าง</strong>
+          ป้านิด: สูตรส้มตำ 12 แบบ + ลูกค้าประจำ 50 คน + ประสบการณ์ขาย 8 ปี
+        </div>
+        <div class="term-meta">เจอใน: Step 1.5 (key activity)</div>
+      </div>
+
+      <div class="term-card" id="term-portfolio" data-term="portfolio">
+        <div class="term-name">Portfolio</div>
+        <div class="term-pronounce">พอร์ตโฟลิโอ · "แฟ้มผลงาน"</div>
+        <div class="term-def"><strong>การรวบรวมผลงาน</strong>เพื่อโชว์ — ปกติใช้สมัครงาน รับงาน หาคนซื้อบริการ ใน Hi, Builder จบคอร์สจะมีใบ Cert + Portfolio รวมกัน</div>
+        <div class="term-example">
+          <strong>Portfolio ของ Builder ใน Hi, Builder</strong>
+          เว็บที่สร้าง + URL + screenshot + เล่าว่าแก้ pain อะไร
+        </div>
+        <div class="term-meta">เจอใน: Landing, บทเรียน 8 (Step 8.4)</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="empty-state" id="emptyState">
+    <p>ไม่พบคำที่ค้นหา 🔍</p>
+    <p style="margin-top: 8px; font-size: 0.85rem;">ลองพิมพ์คำอื่น หรือเลื่อนดูตามหมวดด้านบน</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>📖 Glossary · ส่วนหนึ่งของ <a href="Hi-Builder_botreuan-1.html">Hi, Builder</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+<script>
+  // Search filter
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.term-card');
+  const sections = document.querySelectorAll('.glossary-section');
+  const emptyState = document.getElementById('emptyState');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let totalShown = 0;
+
+    cards.forEach(card => {
+      const terms = (card.dataset.term || '').toLowerCase();
+      const name = card.querySelector('.term-name').textContent.toLowerCase();
+      const def = card.querySelector('.term-def').textContent.toLowerCase();
+      const matches = !q || terms.includes(q) || name.includes(q) || def.includes(q);
+      card.style.display = matches ? '' : 'none';
+      if (matches) totalShown++;
+    });
+
+    sections.forEach(section => {
+      const visibleCards = section.querySelectorAll('.term-card:not([style*="display: none"])').length;
+      section.style.display = visibleCards > 0 ? '' : 'none';
+    });
+
+    emptyState.classList.toggle('show', totalShown === 0);
+  });
+
+  // Highlight on hash navigation
+  function highlightFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const target = document.querySelector(hash);
+    if (target && target.classList.contains('term-card')) {
+      target.classList.add('highlight-target');
+      setTimeout(() => target.classList.remove('highlight-target'), 1500);
+    }
+  }
+  window.addEventListener('load', highlightFromHash);
+  window.addEventListener('hashchange', highlightFromHash);
+</script>
+
+</body>
+</html>

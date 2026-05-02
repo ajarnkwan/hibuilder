@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>404 — หน้านี้ไม่อยู่ · Hi, Builder</title>
+<meta name="description" content="หน้านี้ไม่อยู่">
+<meta property="og:title" content="404 · Hi, Builder">
+<meta property="og:description" content="หน้านี้ไม่อยู่">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="404 · Hi, Builder">
+<meta name="twitter:description" content="หน้านี้ไม่อยู่">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --moss: #5a6b3d;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; color: var(--ink); }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .brand-text a { color: inherit; text-decoration: none; }
+
+  .center-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+  }
+  .error-card {
+    max-width: 540px;
+    text-align: center;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--terra);
+    padding: 48px 36px;
+    position: relative;
+  }
+  .stamp {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    background: var(--terra);
+    color: var(--paper);
+    padding: 8px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .error-card h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 18px 0 12px;
+  }
+  .error-card p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .error-card .ascii {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    line-height: 1.4;
+    white-space: pre;
+    margin: 24px 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .actions {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn {
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.96rem;
+    transition: background 0.12s;
+  }
+  .btn:hover { background: var(--terra); border-color: var(--terra-deep); }
+  .btn.secondary {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn.secondary:hover { background: var(--ink); color: var(--paper); }
+  .help-links {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
+    font-size: 0.88rem;
+    color: var(--ink-faded);
+  }
+  .help-links a {
+    color: var(--terra);
+    margin: 0 8px;
+    text-decoration: underline;
+  }
+  .help-links a:hover { color: var(--terra-deep); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text"><a href="Hi-Builder_landing.html">Hi, Builder</a><span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+</header>
+
+<div class="center-wrap">
+  <div class="error-card">
+    <div class="stamp">404</div>
+    <h1>อ่ะ — หน้านี้ไม่อยู่</h1>
+    <p>ลิงก์อาจพิมพ์ผิด หรือหน้านี้อาจถูกย้ายไป</p>
+
+    <div class="ascii mono">
+   ___
+  /   \
+ |  ?  |
+  \___/
+   ||
+   ||
+___||___</div>
+
+    <p style="font-size: 0.92rem; color: var(--ink-faded); font-style: italic;">
+      ถ้าคิดว่าเป็น bug — ทักอาจารย์ใน Discord หรือ Facebook
+    </p>
+
+    <div class="actions">
+      <a href="Hi-Builder_landing.html" class="btn">← กลับหน้าหลัก</a>
+      <a href="Hi-Builder_botreuan-1.html" class="btn secondary">ไปบทเรียน 1 →</a>
+    </div>
+
+    <div class="help-links">
+      <a href="Hi-Builder_glossary.html">Glossary</a> ·
+      <a href="Hi-Builder_about.html">เกี่ยวกับ</a> ·
+      <a href="https://www.facebook.com/ajarnkwan" target="_blank">Facebook</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

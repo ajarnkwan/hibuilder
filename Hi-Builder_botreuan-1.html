@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>บทเรียน 1 — Hi, Builder</title>
+<meta name="description" content="บทเรียนแรก 7 Steps — รู้จักโลก tech + map asset ของคุณ + สร้าง URL แรก">
+<meta property="og:title" content="บทเรียน 1: แผนที่โลก Tech & Asset Mind Map · Hi, Builder">
+<meta property="og:description" content="บทเรียนแรก 7 Steps — รู้จักโลก tech + map asset ของคุณ + สร้าง URL แรก">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="บทเรียน 1: แผนที่โลก Tech & Asset Mind Map · Hi, Builder">
+<meta name="twitter:description" content="บทเรียนแรก 7 Steps — รู้จักโลก tech + map asset ของคุณ + สร้าง URL แรก">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .crumb {
+    padding: 18px 24px 0;
+    font-size: 0.8rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .crumb a:hover { color: var(--terra); }
+  .crumb .sep { margin: 0 8px; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    padding: 56px 0 48px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .hero-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--terra);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 600px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    border-left: 2px solid var(--terra);
+    padding-left: 14px;
+  }
+  .stat-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  .pillars {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .pillar {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 24px;
+    position: relative;
+  }
+  .pillar-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+  .pillar-name {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  .pillar-desc {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 700px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+  }
+
+  .stepmap { padding: 48px 0; }
+  .stepmap-list {
+    border-left: 2px solid var(--ink);
+    padding-left: 0;
+    margin-left: 24px;
+    list-style: none;
+  }
+  .step-item {
+    position: relative;
+    padding: 0 0 28px 32px;
+  }
+  .step-item:last-child { padding-bottom: 0; }
+  .step-stamp {
+    position: absolute;
+    left: -14px;
+    top: 4px;
+    width: 26px;
+    height: 26px;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    transform: rotate(-4deg);
+  }
+  .step-item.unlocked .step-stamp { background: var(--terra); color: var(--paper); border-color: var(--terra-deep); }
+  .step-item.done .step-stamp { background: var(--moss); color: var(--paper); border-color: var(--moss); }
+  .step-link {
+    display: block;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 18px 22px;
+    transition: all 0.15s;
+  }
+  .step-link:hover {
+    border-color: var(--ink);
+    background: var(--cream-deep);
+    transform: translateX(2px);
+  }
+  .step-item.locked .step-link {
+    background: transparent;
+    border-style: dashed;
+    color: var(--ink-faded);
+    cursor: not-allowed;
+  }
+  .step-item.locked .step-link:hover { transform: none; border-color: var(--rule); background: transparent; }
+  .step-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--terra);
+    letter-spacing: 0.05em;
+  }
+  .step-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-faded);
+  }
+  .step-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .step-item.locked .step-title { color: var(--ink-faded); }
+  .step-star {
+    display: inline-block;
+    background: var(--highlight);
+    padding: 1px 6px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    transform: rotate(-2deg);
+  }
+
+  .outcomes {
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .outcomes h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .outcomes-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  .outcomes-list li {
+    padding: 14px 18px;
+    background: var(--paper);
+    border-left: 3px solid var(--terra);
+    font-size: 1rem;
+  }
+  .outcomes-list li::before {
+    content: "→ ";
+    color: var(--terra);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+
+  .annotation {
+    position: absolute;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--terra);
+    transform: rotate(-3deg);
+  }
+  .anno-1 {
+    top: 24px;
+    right: 24px;
+    border: 1px solid var(--terra);
+    padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="#">เข้าสู่ระบบ</a></div>
+</header>
+
+<div class="crumb">
+  <a href="#">หน้าหลัก</a><span class="sep">/</span><a href="#">Hi, Builder</a><span class="sep">/</span>บทเรียน 1
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <span class="annotation anno-1">🌱 Early Builder รุ่นแรก</span>
+    <div class="hero-meta">บทเรียน 01 / 08</div>
+    <h1>แผนที่โลก Tech<br>& Asset Mind Map</h1>
+    <p class="hero-sub">ก่อนสร้างของ Builder ต้องรู้ว่าโลก tech มีอะไร และตัวเองมี asset อะไรอยู่แล้ว — บทเรียนนี้จะพาคุณสำรวจทั้ง 2 ฝั่ง</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Steps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">~2 ชม.</div>
+        <div class="stat-label">เวลาโดยประมาณ</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">URL ของคุณเอง</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars">
+    <div class="section-label">3 เสาในบทเรียน</div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="pillar-icon">🔨</span>
+        <div class="pillar-name">Build</div>
+        <div class="pillar-desc">สร้าง URL แรกของตัวเอง บน GitHub Pages</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🧠</span>
+        <div class="pillar-name">Think</div>
+        <div class="pillar-desc">มองโลก tech เป็นแผนที่ — ไม่กลัว ไม่หลง</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🛡️</span>
+        <div class="pillar-name">Survive</div>
+        <div class="pillar-desc">รู้จัก AI ฟรี 5 ตัว ที่ใช้ได้ทันที</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stepmap">
+    <div class="section-label">เส้นทาง 7 Steps</div>
+    <ul class="stepmap-list">
+      <li class="step-item unlocked">
+        <div class="step-stamp">1.1</div>
+        <a href="Hi-Builder_step-1-1.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.1</span>
+            <span class="step-time">10 นาที</span>
+          </div>
+          <div class="step-title">Day 1: สวัสดี Builder</div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.2</div>
+        <a href="Hi-Builder_step-1-2.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.2</span>
+            <span class="step-time">15 นาที · 🔒</span>
+          </div>
+          <div class="step-title">โลก Tech มีอะไรบ้าง — analogy ร้านอาหาร</div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.3</div>
+        <a href="Hi-Builder_step-1-3.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.3</span>
+            <span class="step-time">20 นาที · 🔒</span>
+          </div>
+          <div class="step-title">Tour AI ฟรี 5 ตัว</div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.4</div>
+        <a href="Hi-Builder_step-1-4.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.4</span>
+            <span class="step-time">15 นาที · 🔒</span>
+          </div>
+          <div class="step-title">สมัคร GitHub</div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.5</div>
+        <a href="Hi-Builder_step-1-5.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.5</span>
+            <span class="step-time">30 นาที · 🔒</span>
+          </div>
+          <div class="step-title">Asset Mind Map<span class="step-star">key</span></div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.6</div>
+        <a href="Hi-Builder_step-1-6.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.6</span>
+            <span class="step-time">20 นาที · 🔒</span>
+          </div>
+          <div class="step-title">โครงสร้างของเว็บ — HTML/CSS/JS</div>
+        </a>
+      </li>
+      <li class="step-item locked">
+        <div class="step-stamp">1.7</div>
+        <a href="Hi-Builder_step-1-7.html" class="step-link">
+          <div class="step-meta">
+            <span class="step-num">STEP 1.7</span>
+            <span class="step-time">30 นาที · 🔒</span>
+          </div>
+          <div class="step-title">สร้าง URL แรก<span class="step-star">peak</span></div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="outcomes">
+    <h2>จบบทเรียน 1 คุณจะมี</h2>
+    <ul class="outcomes-list">
+      <li>URL ของตัวเองที่โชว์ให้คนอื่นได้ — ไม่ใช่แค่หน้าจอตัวเอง</li>
+      <li>แผนที่ asset ของคุณ — สิ่งที่คุณรู้/มี/ทำได้ ที่จะกลายเป็นวัตถุดิบในบทเรียนถัดๆ ไป</li>
+      <li>รู้จัก AI ฟรี 5 ตัว และเลือกใช้เป็น</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="#">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+</body>
+</html>

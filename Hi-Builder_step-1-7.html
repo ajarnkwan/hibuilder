@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Step 1.7 — สร้าง URL แรก · Hi, Builder</title>
+<meta name="description" content="peak ของบทเรียน 1 · ใช้ AI สร้างเว็บ + ปล่อยขึ้น GitHub Pages = URL ของคุณเอง">
+<meta property="og:title" content="Step 1.7 — สร้าง URL แรก ⭐ · Hi, Builder">
+<meta property="og:description" content="peak ของบทเรียน 1 · ใช้ AI สร้างเว็บ + ปล่อยขึ้น GitHub Pages = URL ของคุณเอง">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Step 1.7 — สร้าง URL แรก ⭐ · Hi, Builder">
+<meta name="twitter:description" content="peak ของบทเรียน 1 · ใช้ AI สร้างเว็บ + ปล่อยขึ้น GitHub Pages = URL ของคุณเอง">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --moss-soft: #d8e0c8;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+    --error: #b54a2a;
+    --error-soft: #f8d7c8;
+    --gh-bg: #0d1117;
+    --gh-surface: #161b22;
+    --gh-border: #30363d;
+    --gh-text: #c9d1d9;
+    --gh-muted: #8b949e;
+    --gh-link: #58a6ff;
+    --gh-green: #238636;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .progress-bar { height: 4px; background: var(--rule); display: flex; }
+  .progress-bar .seg { flex: 1; border-right: 1px solid var(--cream); }
+  .progress-bar .seg:last-child { border-right: none; }
+  .progress-bar .seg.done { background: var(--terra); }
+  .progress-bar .seg.current { background: var(--terra); }
+
+  .crumb {
+    padding: 18px 24px 0;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .crumb a:hover { color: var(--terra); }
+  .crumb .sep { margin: 0 8px; }
+
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+  .step-header {
+    padding: 48px 0 36px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .step-meta-row {
+    display: flex; gap: 16px; align-items: center;
+    margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .step-num-stamp {
+    border: 1.5px solid var(--ink);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .step-time-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+  }
+  .step-time-tag::before { content: "⏱ "; color: var(--terra); }
+  .peak-badge {
+    display: inline-block;
+    background: var(--terra);
+    color: var(--paper);
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    transform: rotate(-2deg);
+    margin-left: 4px;
+  }
+  .step-header h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .outcomes-block {
+    margin: 32px 0 32px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .outcomes-block::before {
+    content: "🎯";
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    background: var(--cream);
+    padding: 0 8px;
+    font-size: 1.2rem;
+  }
+  .outcomes-block h3 {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 12px;
+  }
+  .outcomes-block ul { list-style: none; display: grid; gap: 8px; }
+  .outcomes-block li { padding-left: 18px; position: relative; }
+  .outcomes-block li::before {
+    content: "→"; position: absolute; left: 0;
+    color: var(--terra); font-weight: 600;
+  }
+
+  .section-emoji-h {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 56px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.3;
+  }
+  .section-emoji-h .emoji { font-size: 1.4rem; }
+
+  .body-text {
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .body-text strong { background: var(--highlight); padding: 0 4px; font-weight: 500; }
+  .body-text em { font-style: italic; color: var(--terra-deep); }
+
+  .pullquote {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--paper);
+    border-left: 4px solid var(--terra);
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+  }
+  .pullquote strong { color: var(--ink); font-weight: 600; }
+
+  /* Phase tabs */
+  .phases {
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .phase-tab {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+    text-align: center;
+    position: relative;
+  }
+  .phase-tab .phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .phase-tab .phase-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  .phase-tab .phase-time {
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  @media (max-width: 600px) { .phases { grid-template-columns: 1fr; } }
+
+  /* Tutorial step */
+  .tutorial-step {
+    margin: 32px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--rule);
+  }
+  .tutorial-step-head {
+    background: var(--cream-deep);
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .tutorial-step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--terra);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .tutorial-step-title { font-size: 1.1rem; font-weight: 600; line-height: 1.3; }
+  .tutorial-step-body {
+    padding: 22px;
+  }
+  .tutorial-step-body p {
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .tutorial-step-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 12px;
+  }
+  .tutorial-step-body ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 6px;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+  .tutorial-step-body ul li::before {
+    content: "•";
+    position: absolute;
+    left: 6px;
+    color: var(--terra);
+    font-weight: 700;
+  }
+  .tutorial-step-body code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--cream-deep);
+    padding: 2px 6px;
+    font-size: 0.88em;
+    border: 1px solid var(--rule);
+  }
+  .tip {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--cream-deep);
+    border-left: 3px solid var(--moss);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .tip strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+    margin-bottom: 4px;
+  }
+  .warn {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--cream-deep);
+    border-left: 3px solid var(--error);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .warn strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--error);
+    margin-bottom: 4px;
+  }
+
+  /* Mockup */
+  .mockup {
+    margin: 16px 0;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    background: #f9f9f9;
+    font-family: -apple-system, sans-serif;
+    font-size: 0.72rem;
+  }
+  .browser-bar {
+    background: #ececec;
+    padding: 4px 8px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  .browser-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .browser-dot.r { background: #ff5f56; }
+  .browser-dot.y { background: #ffbd2e; }
+  .browser-dot.g { background: #27c93f; }
+  .browser-url {
+    margin-left: 8px;
+    background: #fff;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.62rem;
+    color: #666;
+    font-family: monospace;
+  }
+  .gh-mockup-body {
+    background: var(--gh-bg);
+    color: var(--gh-text);
+    padding: 14px 16px;
+    min-height: 140px;
+  }
+  .gh-mockup-body h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .gh-mockup-body .gh-input {
+    background: var(--gh-bg);
+    border: 1px solid var(--gh-border);
+    border-radius: 4px;
+    padding: 5px 8px;
+    margin-bottom: 6px;
+    font-size: 0.65rem;
+    color: var(--gh-text);
+  }
+  .gh-mockup-body .gh-label {
+    font-size: 0.6rem;
+    color: var(--gh-muted);
+    margin-bottom: 3px;
+  }
+  .gh-mockup-body .gh-btn {
+    background: var(--gh-green);
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-top: 8px;
+    display: inline-block;
+  }
+  .gh-mockup-body .gh-tab {
+    display: inline-block;
+    background: var(--gh-surface);
+    border: 1px solid var(--gh-border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-right: 4px;
+    font-size: 0.62rem;
+  }
+  .gh-mockup-body .gh-tab.active {
+    background: var(--gh-bg);
+    border-bottom-color: transparent;
+  }
+  .gh-mockup-body .code-area {
+    background: #010409;
+    border: 1px solid var(--gh-border);
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 6px;
+    font-family: monospace;
+    font-size: 0.6rem;
+    line-height: 1.5;
+    color: var(--gh-text);
+    min-height: 60px;
+  }
+  .code-area .k { color: #ff7b72; }
+  .code-area .s { color: #a5d6ff; }
+
+  /* AI prompt mockup */
+  .ai-mockup {
+    background: #f5f3ed;
+    color: var(--ink);
+    padding: 12px 14px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ai-mockup .ai-msg {
+    padding: 6px 10px;
+    border-radius: 8px;
+    max-width: 92%;
+    font-size: 0.66rem;
+    line-height: 1.5;
+  }
+  .ai-mockup .ai-msg.user {
+    background: #ececec;
+    align-self: flex-end;
+    color: #333;
+  }
+  .ai-mockup .ai-msg.ai {
+    background: var(--terra);
+    color: white;
+    align-self: flex-start;
+  }
+
+  /* Browser website mockup (final result) */
+  .web-mockup {
+    background: white;
+    color: var(--ink);
+    padding: 16px 18px;
+    min-height: 200px;
+  }
+  .web-mockup h1 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .web-mockup .web-sub { color: var(--ink-faded); font-size: 0.7rem; margin-bottom: 12px; }
+  .web-mockup .web-section {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #eee;
+  }
+  .web-mockup .web-section:last-child { border-bottom: none; }
+  .web-mockup .web-section-h {
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .web-mockup .web-section-list {
+    list-style: none;
+    font-size: 0.66rem;
+    color: var(--ink-soft);
+    padding-left: 12px;
+  }
+  .web-mockup .web-section-list li::before { content: "• "; color: var(--terra); }
+
+  /* Prompt box */
+  .prompt-readymade {
+    margin: 16px 0;
+    background: var(--paper);
+    border: 1.5px solid var(--terra);
+    padding: 0;
+    overflow: hidden;
+  }
+  .prompt-readymade-head {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 8px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .prompt-readymade-body {
+    padding: 16px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+  .copy-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--cream-deep); }
+
+  /* URL celebration box */
+  .url-celebration {
+    margin: 40px 0;
+    padding: 32px 28px;
+    background: var(--paper);
+    border: 2px solid var(--terra);
+    box-shadow: 5px 5px 0 var(--terra-soft);
+    text-align: center;
+    position: relative;
+  }
+  .url-celebration::before {
+    content: "🎉";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cream);
+    padding: 0 12px;
+    font-size: 1.8rem;
+  }
+  .url-celebration h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .url-celebration p {
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    margin-bottom: 16px;
+  }
+  .url-input-row {
+    max-width: 480px;
+    margin: 0 auto 16px;
+    display: flex;
+    gap: 8px;
+  }
+  .url-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1.5px solid var(--ink);
+    background: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+  .url-input:focus { outline: none; border-color: var(--terra); background: var(--paper); }
+  .open-btn {
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1.5px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .open-btn:hover { background: var(--terra); border-color: var(--terra-deep); }
+
+  /* Final lesson 1 close */
+  .lesson-close {
+    margin: 56px 0 32px;
+    padding: 36px 32px;
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    border: 2px solid var(--ink);
+  }
+  .lesson-close h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .lesson-close .accent {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 0 8px;
+    display: inline-block;
+  }
+  .lesson-close p { color: var(--rule); font-size: 1rem; margin-bottom: 8px; }
+  .lesson-close .achievement-list {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    max-width: 480px;
+    margin: 24px auto 0;
+    text-align: left;
+  }
+  .lesson-close .achievement-list li {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--terra);
+    color: var(--cream);
+    font-size: 0.94rem;
+  }
+  .lesson-close .achievement-list li::before {
+    content: "✓ ";
+    color: var(--terra);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    margin: 56px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    border-top: 2px solid var(--ink);
+  }
+  .nav-link {
+    flex: 1;
+    padding: 18px 22px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    transition: all 0.15s;
+  }
+  .nav-link:hover { background: var(--ink); color: var(--cream); }
+  .nav-link .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .nav-link:hover .nav-label { color: var(--cream); }
+  .nav-link .nav-title { font-weight: 500; font-size: 0.95rem; }
+  .nav-link.locked {
+    opacity: 0.5; cursor: not-allowed;
+    background: transparent; border-style: dashed;
+    pointer-events: none;
+  }
+  .nav-link.unlocked { background: var(--moss-soft); border-color: var(--moss); }
+  .nav-link.unlocked:hover { background: var(--moss); color: var(--paper); }
+  .nav-prev { text-align: left; }
+  .nav-next { text-align: right; }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+
+  /* === GLOSSARY TOOLTIP === */
+  .g-term {
+    border-bottom: 1px dotted var(--terra);
+    cursor: help;
+    position: relative;
+    color: inherit;
+  }
+  .g-term:hover {
+    border-bottom-color: var(--ink);
+    color: var(--terra-deep);
+  }
+  .g-tip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 280px;
+    z-index: 100;
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--terra);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s, transform 0.15s;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  }
+  .g-tip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .g-tip strong { color: var(--terra-soft); display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .g-tip a { color: var(--terra-soft); text-decoration: underline; font-size: 0.78rem; display: block; margin-top: 6px; pointer-events: auto; }
+  .g-tip a:hover { color: var(--cream); }
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="#">เข้าสู่ระบบ</a></div>
+</header>
+
+<div class="progress-bar">
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg current"></div>
+</div>
+
+<div class="crumb">
+  <a href="#">หน้าหลัก</a><span class="sep">/</span><a href="#">Hi, Builder</a><span class="sep">/</span><a href="Hi-Builder_botreuan-1.html">บทเรียน 1</a><span class="sep">/</span>Step 1.7
+</div>
+
+<div class="wrap">
+
+  <section class="step-header">
+    <div class="step-meta-row">
+      <span class="step-num-stamp">STEP 1.7 / 1.7</span>
+      <span class="step-time-tag">30 นาที</span>
+      <span class="peak-badge">⭐ peak ของบทเรียน</span>
+    </div>
+    <h1>สร้าง <span class="g-term" data-term="term-url">URL</span> แรก</h1>
+  </section>
+
+  <div class="outcomes-block">
+    <h3>จบ Step นี้คุณจะ</h3>
+    <ul>
+      <li>มี <span class="g-term" data-term="term-url">URL</span> ของตัวเอง <code>username.github.io</code> ที่เปิดได้จริง</li>
+      <li>สร้างเว็บโปรไฟล์แรกด้วย AI (ใช้ <span class="g-term" data-term="term-asset">asset</span> map จาก Step 1.5)</li>
+      <li>เห็นเว็บของตัวเองทำงานบนอินเทอร์เน็ตจริง — ครั้งแรกของชีวิต Builder</li>
+    </ul>
+  </div>
+
+  <!-- ============== INTRO ============== -->
+  <p class="body-text">นี่คือ Step ที่ <strong>เปลี่ยนพวกเราจาก "ผู้เรียน" → "ผู้สร้าง"</strong> — เพราะจบ Step นี้ พวกเราจะมีของจริง <span class="g-term" data-term="term-url">URL</span> จริง ที่เปิดบนมือถือเพื่อนได้ทันที</p>
+
+  <div class="pullquote">
+    เว็บแรกไม่ต้องสวย ไม่ต้องสมบูรณ์ — <strong>แค่ "เปิดได้"</strong> ก็ชนะแล้ว
+    <br><br>
+    เพราะของจริง > ของในใจ
+  </div>
+
+  <!-- ============== PHASES OVERVIEW ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🗺️</span> 3 Phase ของ Step นี้</h2>
+
+  <div class="phases">
+    <div class="phase-tab">
+      <div class="phase-num">PHASE 1</div>
+      <div class="phase-name">ใช้ AI สร้าง <span class="g-term" data-term="term-html">HTML</span></div>
+      <div class="phase-time">~10 นาที</div>
+    </div>
+    <div class="phase-tab">
+      <div class="phase-num">PHASE 2</div>
+      <div class="phase-name">สร้าง <span class="g-term" data-term="term-repo">repo</span> บน GitHub</div>
+      <div class="phase-time">~10 นาที</div>
+    </div>
+    <div class="phase-tab">
+      <div class="phase-num">PHASE 3</div>
+      <div class="phase-name">เปิด <span class="g-term" data-term="term-url">URL</span> ดูเว็บจริง</div>
+      <div class="phase-time">~10 นาที</div>
+    </div>
+  </div>
+
+  <!-- ============== PHASE 1 ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🤖</span> Phase 1 — ให้ AI สร้าง <span class="g-term" data-term="term-html">HTML</span></h2>
+
+  <p class="body-text">เราจะใช้ AI (Claude หรือ ChatGPT — ตัวที่อาจารย์เคยพูดถึงใน Step 1.3) สร้างหน้าเว็บโปรไฟล์ของพวกเรา <strong>โดยใช้ <span class="g-term" data-term="term-asset">asset</span> map ที่กรอกใน Step 1.5</strong></p>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">1</div>
+      <div class="tutorial-step-title">เปิด Claude หรือ ChatGPT</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>เปิดอันใดอันหนึ่งใน <span class="g-term" data-term="term-browser">browser</span>:</p>
+      <ul>
+        <li><a href="https://claude.ai" target="_blank" style="color: var(--terra); text-decoration: underline;">claude.ai</a></li>
+        <li><a href="https://chat.openai.com" target="_blank" style="color: var(--terra); text-decoration: underline;">chat.openai.com</a></li>
+      </ul>
+      <p>เริ่มแชทใหม่ (กด "New chat")</p>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">2</div>
+      <div class="tutorial-step-title">copy <span class="g-term" data-term="term-prompt">prompt</span> นี้ไปใช้</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>นี่คือ <span class="g-term" data-term="term-prompt">prompt</span> ที่อาจารย์เตรียมไว้ — กดปุ่ม Copy แล้ววางใน chat ของ AI:</p>
+
+      <div class="prompt-readymade">
+        <div class="prompt-readymade-head">
+          <span>📋 PROMPT</span>
+          <button class="copy-btn" id="copyPrompt">Copy</button>
+        </div>
+        <div class="prompt-readymade-body" id="promptText">ช่วยสร้างหน้าเว็บ <span class="g-term" data-term="term-html">HTML</span> ไฟล์เดียว เป็นหน้า "About me" ของฉัน
+
+ข้อกำหนด:
+- เป็น <span class="g-term" data-term="term-html">HTML</span>, <span class="g-term" data-term="term-css">CSS</span>, <span class="g-term" data-term="term-js">JS</span> ในไฟล์เดียว ไม่ต้องใช้ external library
+- โทนสีอบอุ่น ใช้ฟอนต์อ่านง่าย mobile-friendly
+- มี 5 sections ตามนี้:
+  1. ชื่อของฉัน + 1 ประโยคแนะนำตัว
+  2. ความรู้ที่ฉันมี (list 3-5 ข้อ)
+  3. ทักษะที่ฉันถนัด (list 3-5 ข้อ)
+  4. Network ของฉัน (list 3-5 ข้อ)
+  5. ประสบการณ์สำคัญ (list 3-5 ข้อ)
+- มี footer เล็กๆ ว่า "สร้างด้วย Hi, Builder by อาจารย์ขวัญ"
+
+ฉันจะใส่ข้อมูลจริงเองหลังได้ <span class="g-term" data-term="term-html">HTML</span> แล้ว — ตอนนี้ใส่ placeholder ก็ได้</div>
+      </div>
+
+      <div class="tip">
+        <strong>ทำไมถึงไม่ใส่ข้อมูลจริงตั้งแต่แรก?</strong>
+        เพราะถ้าใส่ไปครั้งเดียวยาว ๆ AI อาจตีความผิด — ดีกว่า ขอ skeleton ก่อน แล้วค่อยใส่ข้อมูลจริงทีหลัง
+      </div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">3</div>
+      <div class="tutorial-step-title">รอ AI สร้างให้ + copy code</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>AI จะตอบมาเป็น <span class="g-term" data-term="term-html">HTML</span> code 1 ก้อน — copy ทั้งก้อน (กดปุ่ม "Copy code" ใน AI หรือ select ทั้งหมด)</p>
+
+      <div class="mockup">
+        <div class="browser-bar">
+          <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+          <span class="browser-url">claude.ai</span>
+        </div>
+        <div class="ai-mockup">
+          <div class="ai-msg user">ช่วยสร้างหน้าเว็บ <span class="g-term" data-term="term-html">HTML</span> ไฟล์เดียว...</div>
+          <div class="ai-msg ai">นี่คือ <span class="g-term" data-term="term-html">HTML</span> สำหรับหน้า About me ของคุณ:<br><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="th"&gt;<br>...</div>
+        </div>
+      </div>
+
+      <div class="warn">
+        <strong>ก่อนไปต่อ</strong>
+        เก็บ code ไว้ — เปิด Notepad / TextEdit / Google Docs แล้ววางไว้ก่อน เผื่อต้องใช้
+      </div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">4</div>
+      <div class="tutorial-step-title">แก้ placeholder เป็นข้อมูลจริง</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>เปิด <span class="g-term" data-term="term-asset">Asset</span> Map ที่ทำใน Step 1.5 (ในหน้านี้, อาจกดเปิด Step 1.5 ใน tab ใหม่เพื่อดู)</p>
+      <p>กลับไปบอก AI ต่อในแชทเดิม:</p>
+      <div class="prompt-readymade">
+        <div class="prompt-readymade-head">
+          <span>📋 PROMPT 2</span>
+          <button class="copy-btn" id="copyPrompt2">Copy</button>
+        </div>
+        <div class="prompt-readymade-body" id="promptText2">ดีมาก ทีนี้ใส่ข้อมูลจริงของฉัน:
+
+ชื่อ: [ใส่ชื่อจริงของคุณ]
+แนะนำตัว: [1 ประโยคสั้น ๆ เช่น "อาจารย์เศรษฐศาสตร์ที่อยากเรียนรู้สิ่งใหม่"]
+
+ความรู้:
+- [ข้อ 1 จาก <span class="g-term" data-term="term-asset">asset</span> map]
+- [ข้อ 2]
+- [ข้อ 3]
+
+ทักษะ:
+- [ข้อ 1]
+- [ข้อ 2]
+- [ข้อ 3]
+
+Network:
+- [ข้อ 1]
+- [ข้อ 2]
+- [ข้อ 3]
+
+ประสบการณ์:
+- [ข้อ 1]
+- [ข้อ 2]
+- [ข้อ 3]
+
+ส่ง <span class="g-term" data-term="term-html">HTML</span> version ใหม่ที่ใส่ข้อมูลจริงเรียบร้อย</div>
+      </div>
+      <p>AI จะส่ง <span class="g-term" data-term="term-html">HTML</span> ใหม่ที่ใส่ข้อมูลจริงให้ — copy version นี้ไปใช้</p>
+    </div>
+  </div>
+
+  <!-- ============== PHASE 2 ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">📦</span> Phase 2 — สร้าง <span class="g-term" data-term="term-repo">repo</span> บน GitHub</h2>
+
+  <p class="body-text">ตอนนี้เรามี <span class="g-term" data-term="term-html">HTML</span> แล้ว ต้องเอาไป "ปล่อยขึ้นเว็บ" ผ่าน <span class="g-term" data-term="term-githubpages">GitHub Pages</span></p>
+
+  <div class="tip" style="margin: 16px 0 24px; padding: 14px 18px;">
+    <strong>คำใหม่ใน Phase นี้</strong>
+    <span style="display: block; margin-top: 6px;"><strong style="color: var(--ink);"><span class="g-term" data-term="term-repo">Repo</span> (<span class="g-term" data-term="term-repo">Repository</span>)</strong> = "โฟลเดอร์โปรเจกต์" บน GitHub — เก็บไฟล์ทุกไฟล์ของเว็บเดียวไว้ด้วยกัน 1 เว็บ = 1 <span class="g-term" data-term="term-repo">repo</span></span>
+    <span style="display: block; margin-top: 4px;"><strong style="color: var(--ink);"><span class="g-term" data-term="term-commit">Commit</span></strong> = บันทึก/save การเปลี่ยนแปลงเข้า <span class="g-term" data-term="term-repo">repo</span> — มี history ดูย้อนได้</span>
+    <span style="display: block; margin-top: 4px;"><strong style="color: var(--ink);"><span class="g-term" data-term="term-deploy">Deploy</span></strong> = ปล่อยเว็บออกสู่อินเทอร์เน็ต — หลัง <span class="g-term" data-term="term-commit">commit</span> GitHub จะ <span class="g-term" data-term="term-deploy">deploy</span> อัตโนมัติ</span>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">5</div>
+      <div class="tutorial-step-title">เข้า GitHub แล้วสร้าง <span class="g-term" data-term="term-repo">repo</span> ใหม่</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>ไปที่ <code>github.com</code> → กดปุ่ม <strong>"New <span class="g-term" data-term="term-repo">repository</span>"</strong> มุมบนขวา (เครื่องหมาย <code>+</code>)</p>
+      <ul>
+        <li><span class="g-term" data-term="term-repo">Repository</span> name: <code>username.github.io</code> <em>(แทน <code>username</code> ด้วย username ของพวกเราจริง)</em></li>
+        <li>เลือก <strong>Public</strong></li>
+        <li>ติ๊ก <strong>"Add a <span class="g-term" data-term="term-readme">README</span> file"</strong></li>
+        <li>กด <strong>"Create <span class="g-term" data-term="term-repo">repository</span>"</strong></li>
+      </ul>
+
+      <div class="mockup">
+        <div class="browser-bar">
+          <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+          <span class="browser-url">github.com/new</span>
+        </div>
+        <div class="gh-mockup-body">
+          <h4>Create a new <span class="g-term" data-term="term-repo">repository</span></h4>
+          <div class="gh-label"><span class="g-term" data-term="term-repo">Repository</span> name *</div>
+          <div class="gh-input">mybuilder.github.io</div>
+          <div style="font-size: 0.6rem; color: var(--gh-green); margin: 4px 0 8px;">✓ This will be your User Pages site</div>
+          <div class="gh-label">Visibility</div>
+          <div class="gh-input">● Public &nbsp;&nbsp; ○ Private</div>
+          <div class="gh-btn">Create <span class="g-term" data-term="term-repo">repository</span> →</div>
+        </div>
+      </div>
+
+      <div class="warn">
+        <strong>สำคัญที่สุด</strong>
+        ชื่อ <span class="g-term" data-term="term-repo">repo</span> ต้องเป็น <code>username.github.io</code> (ตรงเป๊ะกับ username) — ถ้าตั้งชื่ออื่น <span class="g-term" data-term="term-githubpages">GitHub Pages</span> จะไม่ทำงานเป็น user site
+      </div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">6</div>
+      <div class="tutorial-step-title">สร้างไฟล์ <span class="g-term" data-term="term-indexhtml">index.html</span></div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>หลังสร้าง <span class="g-term" data-term="term-repo">repo</span> เสร็จ — กดปุ่ม <strong>"Add file" → "Create new file"</strong></p>
+      <ul>
+        <li>ตั้งชื่อไฟล์: <code>index.html</code></li>
+        <li>วาง <span class="g-term" data-term="term-html">HTML</span> code ที่ AI สร้างให้ ลงในกล่องใหญ่</li>
+        <li>เลื่อนลงล่างสุด → กด <strong>"<span class="g-term" data-term="term-commit">Commit</span> changes"</strong></li>
+      </ul>
+
+      <div class="mockup">
+        <div class="browser-bar">
+          <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+          <span class="browser-url">github.com/.../new</span>
+        </div>
+        <div class="gh-mockup-body">
+          <div class="gh-label">Name your file</div>
+          <div class="gh-input"><span class="g-term" data-term="term-indexhtml">index.html</span></div>
+          <div class="gh-label" style="margin-top: 8px;">Edit content</div>
+          <div class="code-area">
+            <span class="k">&lt;!DOCTYPE</span> html<span class="k">&gt;</span><br>
+            <span class="k">&lt;html</span> lang=<span class="s">"th"</span><span class="k">&gt;</span><br>
+            <span class="k">&lt;head&gt;</span><br>
+            &nbsp;&nbsp;<span class="k">&lt;title&gt;</span>About me<span class="k">&lt;/title&gt;</span><br>
+            <span class="k">&lt;/head&gt;</span><br>
+            ...
+          </div>
+          <div class="gh-btn"><span class="g-term" data-term="term-commit">Commit</span> changes</div>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>นึกถึง <span class="g-term" data-term="term-commit">commit</span> ว่า...</strong>
+        <span class="g-term" data-term="term-commit">Commit</span> = กด save ที่บันทึกประวัติได้ — เปลี่ยนใจค่อยกลับมาแก้ทีหลัง หรือดู version เก่าได้
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== PHASE 3 ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🌐</span> Phase 3 — เปิดดู <span class="g-term" data-term="term-url">URL</span> จริง</h2>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">7</div>
+      <div class="tutorial-step-title">รอ <span class="g-term" data-term="term-githubpages">GitHub Pages</span> <span class="g-term" data-term="term-deploy">deploy</span> (~1-2 นาที)</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>หลัง <span class="g-term" data-term="term-commit">commit</span> แล้ว GitHub จะ <strong><span class="g-term" data-term="term-deploy">deploy</span> เว็บอัตโนมัติ</strong> ใช้เวลา 1-2 นาที — ระหว่างนี้นั่งรอได้</p>
+      <p>ถ้าอยากเช็คว่าเสร็จหรือยัง: ไปที่ <strong>Settings → Pages</strong> ใน <span class="g-term" data-term="term-repo">repo</span> จะเห็นข้อความ <em>"Your site is live at..."</em> เมื่อพร้อม</p>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="tutorial-step-head">
+      <div class="tutorial-step-num">8</div>
+      <div class="tutorial-step-title">เปิด <span class="g-term" data-term="term-url">URL</span> ของตัวเอง</div>
+    </div>
+    <div class="tutorial-step-body">
+      <p>เปิด tab ใหม่ในเบราว์เซอร์ → พิมพ์ <span class="g-term" data-term="term-url">URL</span>:</p>
+      <p style="text-align: center; font-size: 1.2rem; font-family: 'IBM Plex Mono', monospace; color: var(--terra-deep); font-weight: 600; padding: 16px; background: var(--cream-deep); border: 1px solid var(--rule);">
+        username.github.io
+      </p>
+      <p>(แทน <code>username</code> ด้วยของพวกเราจริง)</p>
+      <p>คุณจะเห็น <strong>เว็บโปรไฟล์ของตัวเอง</strong> เปิดบนอินเทอร์เน็ตจริง — โชว์ใครก็ได้ ใช้ได้บนมือถือด้วย</p>
+
+      <div class="mockup">
+        <div class="browser-bar">
+          <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+          <span class="browser-url">mybuilder.github.io</span>
+        </div>
+        <div class="web-mockup">
+          <h1>👋 สวัสดี ฉันคือ My Builder</h1>
+          <div class="web-sub">Builder จาก Hi, Builder</div>
+          <div class="web-section">
+            <div class="web-section-h">🧠 ความรู้</div>
+            <ul class="web-section-list">
+              <li>เศรษฐศาสตร์เบื้องต้น</li>
+              <li>การจัดการเงินส่วนบุคคล</li>
+            </ul>
+          </div>
+          <div class="web-section">
+            <div class="web-section-h">💪 ทักษะ</div>
+            <ul class="web-section-list">
+              <li>ทำกับข้าวไทย</li>
+              <li>สอนคนใจเย็น</li>
+            </ul>
+          </div>
+          <div class="web-section">
+            <div class="web-section-h">🌟 ประสบการณ์</div>
+            <ul class="web-section-list">
+              <li>ทำงานบริษัท 5 ปี</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== URL CELEBRATION ============== -->
+  <div class="url-celebration">
+    <h3>กรอก <span class="g-term" data-term="term-url">URL</span> ของพวกเรา</h3>
+    <p>พิมพ์ <span class="g-term" data-term="term-url">URL</span> ของพวกเรา (เช่น <code>mybuilder.github.io</code>) — กดเปิดเช็คได้ทันที</p>
+    <div class="url-input-row">
+      <input type="text" class="url-input" id="urlInput" placeholder="username.github.io">
+      <button class="open-btn" id="openBtn">เปิด →</button>
+    </div>
+    <p style="font-size: 0.85rem; color: var(--ink-faded); font-style: italic; margin-bottom: 0;">
+      ✨ บันทึกไว้ใน <span class="g-term" data-term="term-browser">browser</span> ของพวกเรา — กลับมาดูได้ตลอด
+    </p>
+  </div>
+
+  <!-- ============== LESSON CLOSE ============== -->
+  <div class="lesson-close">
+    <h3>🎉 จบ <span class="accent">บทเรียน 1</span> แล้ว!</h3>
+    <p>ขอบคุณที่อยู่กับอาจารย์ตลอด 6 Step ที่ผ่านมา</p>
+    <p>ตอนนี้ทุกคนมีของพวกนี้แล้ว:</p>
+    <ul class="achievement-list">
+      <li>เข้าใจโลก tech แบบที่ไม่ต้องกลัวอีก</li>
+      <li>รู้จัก AI ฟรี 5 ตัว ใช้เลือกตามงานได้</li>
+      <li>มีบัญชี GitHub ของตัวเอง</li>
+      <li>มี <span class="g-term" data-term="term-asset">Asset</span> Map ที่ list ของในตัวเองออกมา</li>
+      <li><strong style="color: var(--terra-soft);">มี <span class="g-term" data-term="term-url">URL</span> ของตัวเองที่เปิดได้จริง</strong></li>
+    </ul>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="Hi-Builder_step-1-6.html" class="nav-link nav-prev">
+      <div class="nav-label">← ย้อนกลับ</div>
+      <div class="nav-title">Step 1.6 — โครงสร้างเว็บ</div>
+    </a>
+    <a href="Hi-Builder_botreuan-1.html" class="nav-link nav-next" style="background: var(--terra); color: var(--paper); border-color: var(--terra-deep);">
+      <div class="nav-label" style="color: rgba(255,255,255,0.7);">บทเรียน 1 จบ ✓</div>
+      <div class="nav-title">ไปบทเรียน 2 — คุยกับ AI →</div>
+    </a>
+  </nav>
+
+</div>
+
+<footer>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="#">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+<script>
+  // Copy buttons
+  function copyText(elementId, btnId) {
+    const txt = document.getElementById(elementId).textContent;
+    const btn = document.getElementById(btnId);
+    navigator.clipboard.writeText(txt).then(() => {
+      const original = btn.textContent;
+      btn.textContent = '✓ Copied';
+      setTimeout(() => btn.textContent = original, 1500);
+    });
+  }
+  document.getElementById('copyPrompt').addEventListener('click', () => copyText('promptText', 'copyPrompt'));
+  document.getElementById('copyPrompt2').addEventListener('click', () => copyText('promptText2', 'copyPrompt2'));
+
+  // URL save & open
+  const URL_KEY = 'hibuilder_first_url';
+  const urlInput = document.getElementById('urlInput');
+  const openBtn = document.getElementById('openBtn');
+
+  // Load saved
+  const saved = localStorage.getItem(URL_KEY);
+  if (saved) urlInput.value = saved;
+
+  urlInput.addEventListener('input', () => {
+    localStorage.setItem(URL_KEY, urlInput.value);
+  });
+
+  openBtn.addEventListener('click', () => {
+    let url = urlInput.value.trim();
+    if (!url) {
+      alert('กรอก URL ก่อนนะคะ');
+      return;
+    }
+    if (!url.startsWith('http')) url = 'https://' + url;
+    window.open(url, '_blank');
+  });
+</script>
+
+
+<script>
+  // Mini glossary for tooltip previews (short defs only)
+  const GLOSSARY = {
+    'term-html': { name: 'HTML', def: 'ภาษาที่ใช้บอกว่า "เว็บมีอะไร" — โครงกระดูกของหน้าเว็บ' },
+    'term-css': { name: 'CSS', def: 'ภาษาที่ใช้แต่งเว็บให้สวย — สี ฟอนต์ เลย์เอาต์' },
+    'term-js': { name: 'JS (JavaScript)', def: 'ภาษาที่ทำให้เว็บเคลื่อนไหวและตอบโต้' },
+    'term-tag': { name: 'Tag', def: 'ของในวงเล็บมุม <> ที่บอกว่าส่วนนี้คืออะไร — เปิดต้องปิดเป็นคู่' },
+    'term-indexhtml': { name: 'index.html', def: 'ชื่อไฟล์ที่เซิร์ฟเวอร์เปิดเป็นค่าเริ่มต้น — "หน้าแรก" ของเว็บ' },
+    'term-repo': { name: 'Repo (Repository)', def: '"โฟลเดอร์โปรเจกต์" บน GitHub — 1 เว็บ = 1 repo' },
+    'term-commit': { name: 'Commit', def: 'บันทึกการเปลี่ยนแปลงเข้า repo — มี history ดูย้อนได้' },
+    'term-deploy': { name: 'Deploy', def: 'ปล่อยเว็บออกสู่อินเทอร์เน็ต — บน GitHub Pages เกิดอัตโนมัติหลัง commit' },
+    'term-githubpages': { name: 'GitHub Pages', def: 'บริการโฮสต์เว็บฟรีของ GitHub — ใช้ตลอดคอร์ส' },
+    'term-readme': { name: 'README', def: 'ไฟล์คำอธิบายของ repo — ไฟล์แรกที่คนอื่นเห็น' },
+    'term-url': { name: 'URL', def: '"ที่อยู่" ของหน้าเว็บบนอินเทอร์เน็ต' },
+    'term-hosting': { name: 'Hosting', def: 'บริการเก็บไฟล์เว็บบนเซิร์ฟเวอร์ที่เปิด 24 ชั่วโมง' },
+    'term-browser': { name: 'Browser', def: 'โปรแกรมเปิดเว็บ — Chrome, Safari, Edge, Firefox' },
+    'term-localstorage': { name: 'localStorage', def: 'ช่องเก็บข้อมูลในเบราว์เซอร์ — ของไม่หายเมื่อปิดหน้า' },
+    'term-json': { name: 'JSON', def: 'รูปแบบไฟล์เก็บข้อมูลแบบมีโครง — มนุษย์อ่านได้ คอมเข้าใจ' },
+    'term-prompt': { name: 'Prompt', def: 'ข้อความที่พิมพ์/พูดให้ AI — คำสั่ง+คำถาม+บริบท' },
+    'term-asset': { name: 'Asset', def: '"ทุน" ของ Builder — สิ่งที่คุณมีอยู่แล้ว ที่จะใช้สร้างของได้' },
+    'term-portfolio': { name: 'Portfolio', def: 'การรวบรวมผลงาน — ใช้สมัครงาน หาคนซื้อบริการ' }
+  };
+
+  let activeTip = null;
+  function showTip(el, ev) {
+    const id = el.dataset.term;
+    const g = GLOSSARY[id];
+    if (!g) return;
+    if (activeTip) hideTip();
+    const tip = document.createElement('div');
+    tip.className = 'g-tip';
+    tip.innerHTML = `<strong>${g.name}</strong>${g.def}<a href="Hi-Builder_glossary.html#${id}" target="_blank">ดูเต็ม →</a>`;
+    document.body.appendChild(tip);
+    const rect = el.getBoundingClientRect();
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    // adjust if overflow right
+    const tw = 280;
+    if (left + tw > window.innerWidth - 16) left = window.innerWidth - tw - 16;
+    if (left < 16) left = 16;
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    requestAnimationFrame(() => tip.classList.add('show'));
+    activeTip = tip;
+  }
+  function hideTip() {
+    if (!activeTip) return;
+    const t = activeTip;
+    activeTip = null;
+    t.classList.remove('show');
+    setTimeout(() => t.remove(), 150);
+  }
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.g-term');
+    if (t) showTip(t, e);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.g-term');
+    if (t && !e.relatedTarget?.closest('.g-tip')) hideTip();
+  });
+  // Mobile/touch — tap to toggle
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.g-term');
+    if (t) {
+      e.preventDefault();
+      if (activeTip && activeTip.previousMatchEl === t) {
+        hideTip();
+      } else {
+        showTip(t, e);
+        if (activeTip) activeTip.previousMatchEl = t;
+      }
+    } else if (!e.target.closest('.g-tip')) {
+      hideTip();
+    }
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
+</script>
+
+</body>
+</html>

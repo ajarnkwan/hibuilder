@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Step 1.2 — โลก Tech มีอะไรบ้าง · Hi, Builder</title>
+<meta name="description" content="รู้จัก Frontend / Backend / Database ผ่านอุปมาร้านอาหารตามสั่ง">
+<meta property="og:title" content="Step 1.2 — โลก Tech · Hi, Builder">
+<meta property="og:description" content="รู้จัก Frontend / Backend / Database ผ่านอุปมาร้านอาหารตามสั่ง">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Step 1.2 — โลก Tech · Hi, Builder">
+<meta name="twitter:description" content="รู้จัก Frontend / Backend / Database ผ่านอุปมาร้านอาหารตามสั่ง">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --letter: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --moss-soft: #d8e0c8;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+    --error: #b54a2a;
+    --error-soft: #f8d7c8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--rule);
+    display: flex;
+  }
+  .progress-bar .seg {
+    flex: 1;
+    border-right: 1px solid var(--cream);
+  }
+  .progress-bar .seg:last-child { border-right: none; }
+  .progress-bar .seg.done { background: var(--terra); }
+  .progress-bar .seg.current { background: var(--terra); }
+
+  .crumb {
+    padding: 18px 24px 0;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .crumb a:hover { color: var(--terra); }
+  .crumb .sep { margin: 0 8px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  .step-header {
+    padding: 48px 0 36px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .step-meta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .step-num-stamp {
+    border: 1.5px solid var(--ink);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .step-time-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+  }
+  .step-time-tag::before { content: "⏱ "; color: var(--terra); }
+  .step-header h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  /* Outcomes block */
+  .outcomes-block {
+    margin: 32px 0 48px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .outcomes-block::before {
+    content: "🎯";
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    background: var(--cream);
+    padding: 0 8px;
+    font-size: 1.2rem;
+  }
+  .outcomes-block h3 {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 12px;
+  }
+  .outcomes-block ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .outcomes-block li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .outcomes-block li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--terra);
+    font-weight: 600;
+  }
+
+  /* Section heading */
+  .section-emoji-h {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 56px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.3;
+  }
+  .section-emoji-h .emoji { font-size: 1.4rem; }
+
+  /* Body content */
+  .body-text {
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .body-text strong {
+    background: var(--highlight);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+  .body-text em {
+    font-style: italic;
+    color: var(--terra-deep);
+  }
+
+  /* Pull quote box */
+  .pullquote {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--paper);
+    border-left: 4px solid var(--terra);
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+  }
+  .pullquote strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pullquote em {
+    font-style: italic;
+    color: var(--terra-deep);
+  }
+
+  /* Mapping table */
+  .map-table {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    font-size: 0.95rem;
+  }
+  .map-table th {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .map-table td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .map-table tr:hover td { background: var(--cream); }
+  .map-table .col-thai { font-weight: 500; }
+  .map-table .col-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--terra-deep);
+    font-weight: 600;
+  }
+  .map-table .col-desc {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 600px) {
+    .map-table { font-size: 0.88rem; }
+    .map-table th, .map-table td { padding: 10px 12px; }
+    .map-table .col-desc { display: none; }
+  }
+
+  /* Builder table — what we do/don't do */
+  .builder-table {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    font-size: 0.95rem;
+  }
+  .builder-table th {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .builder-table td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .builder-table tr.do td:first-child { border-left: 3px solid var(--moss); }
+  .builder-table tr.dont td:first-child { border-left: 3px solid var(--ink-faded); opacity: 0.85; }
+  .builder-table .icon { font-weight: 700; font-size: 1rem; }
+  .builder-table .col-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--terra-deep);
+    font-weight: 600;
+  }
+  .builder-table .col-detail { color: var(--ink-soft); font-size: 0.9rem; }
+  @media (max-width: 600px) {
+    .builder-table .col-detail { font-size: 0.85rem; }
+  }
+
+  /* Key points */
+  .keypoints {
+    margin: 40px 0;
+    padding: 28px 32px;
+    background: var(--cream-deep);
+    border: 1px solid var(--ink);
+    border-left: 5px solid var(--terra);
+  }
+  .keypoints h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .keypoints ol {
+    list-style: none;
+    counter-reset: kp-counter;
+    display: grid;
+    gap: 18px;
+  }
+  .keypoints li {
+    counter-increment: kp-counter;
+    padding-left: 44px;
+    position: relative;
+  }
+  .keypoints li::before {
+    content: counter(kp-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--terra);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .keypoints li strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .keypoints li span {
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+  }
+
+  /* Quiz section */
+  .quiz {
+    margin: 40px 0 32px;
+    padding: 36px 32px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    position: relative;
+  }
+  .quiz::before {
+    content: "✏️";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cream);
+    padding: 0 12px;
+    font-size: 1.5rem;
+  }
+  .quiz-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .quiz-help {
+    text-align: center;
+    color: var(--ink-faded);
+    font-size: 0.86rem;
+    margin-bottom: 24px;
+  }
+  .quiz-question {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 18px;
+    background: var(--cream);
+    border: 1.5px solid var(--rule);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    transition: all 0.12s;
+    line-height: 1.4;
+  }
+  .quiz-option:hover {
+    border-color: var(--ink);
+    background: var(--paper);
+  }
+  .quiz-option .opt-num {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  .quiz-option.correct {
+    border-color: var(--moss);
+    background: var(--moss-soft);
+  }
+  .quiz-option.correct .opt-num {
+    background: var(--moss);
+  }
+  .quiz-option.wrong {
+    border-color: var(--error);
+    background: var(--error-soft);
+    opacity: 0.7;
+  }
+  .quiz-option.wrong .opt-num {
+    background: var(--error);
+  }
+  .quiz-option:disabled { cursor: not-allowed; }
+
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--terra);
+    background: var(--cream);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct {
+    border-left-color: var(--moss);
+    background: var(--moss-soft);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .quiz-feedback.wrong {
+    border-left-color: var(--error);
+    background: var(--error-soft);
+  }
+  .quiz-feedback strong { color: var(--ink); }
+
+  /* Multi-question progress (added v3) */
+  .quiz-progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .quiz-progress .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--rule);
+    border: 1.5px solid var(--ink-faded);
+    transition: all 0.2s;
+  }
+  .quiz-progress .dot.current {
+    background: var(--terra);
+    border-color: var(--terra-deep);
+    transform: scale(1.2);
+  }
+  .quiz-progress .dot.done {
+    background: var(--moss);
+    border-color: var(--moss);
+  }
+  .quiz-counter {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+  }
+  .quiz-final {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--moss-soft);
+    border: 1.5px solid var(--moss);
+    text-align: center;
+    display: none;
+  }
+  .quiz-final.show { display: block; }
+  .quiz-final h4 { font-weight: 600; color: var(--ink); margin-bottom: 4px; font-size: 1.05rem; }
+  .quiz-final p { color: var(--ink-soft); font-size: 0.9rem; margin: 0; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    margin: 56px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    border-top: 2px solid var(--ink);
+  }
+  .nav-link {
+    flex: 1;
+    padding: 18px 22px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    transition: all 0.15s;
+  }
+  .nav-link:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .nav-link .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .nav-link:hover .nav-label { color: var(--cream); }
+  .nav-link .nav-title { font-weight: 500; font-size: 0.95rem; }
+  .nav-link.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    border-style: dashed;
+    pointer-events: none;
+  }
+  .nav-link.unlocked {
+    background: var(--moss-soft);
+    border-color: var(--moss);
+  }
+  .nav-link.unlocked:hover { background: var(--moss); color: var(--paper); }
+  .nav-prev { text-align: left; }
+  .nav-next { text-align: right; }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+
+  /* === GLOSSARY TOOLTIP === */
+  .g-term {
+    border-bottom: 1px dotted var(--terra);
+    cursor: help;
+    position: relative;
+    color: inherit;
+  }
+  .g-term:hover {
+    border-bottom-color: var(--ink);
+    color: var(--terra-deep);
+  }
+  .g-tip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 280px;
+    z-index: 100;
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--terra);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s, transform 0.15s;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  }
+  .g-tip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .g-tip strong { color: var(--terra-soft); display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .g-tip a { color: var(--terra-soft); text-decoration: underline; font-size: 0.78rem; display: block; margin-top: 6px; pointer-events: auto; }
+  .g-tip a:hover { color: var(--cream); }
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="#">เข้าสู่ระบบ</a></div>
+</header>
+
+<div class="progress-bar">
+  <div class="seg done"></div>
+  <div class="seg current"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+</div>
+
+<div class="crumb">
+  <a href="#">หน้าหลัก</a><span class="sep">/</span><a href="#">Hi, Builder</a><span class="sep">/</span><a href="Hi-Builder_botreuan-1.html">บทเรียน 1</a><span class="sep">/</span>Step 1.2
+</div>
+
+<div class="wrap">
+
+  <section class="step-header">
+    <div class="step-meta-row">
+      <span class="step-num-stamp">STEP 1.2 / 1.7</span>
+      <span class="step-time-tag">15 นาที</span>
+    </div>
+    <h1>โลก Tech มีอะไรบ้าง</h1>
+  </section>
+
+  <div class="outcomes-block">
+    <h3>จบ Step นี้คุณจะ</h3>
+    <ul>
+      <li>เข้าใจว่า "โลก tech" มีองค์ประกอบหลักอะไรบ้าง</li>
+      <li>รู้ว่าใน Hi, Builder เราจะทำส่วนไหน (และไม่ทำส่วนไหน)</li>
+      <li>ไม่กลัวคำศัพท์เทค พอเจอแล้วเดาบริบทได้</li>
+    </ul>
+  </div>
+
+  <h2 class="section-emoji-h"><span class="emoji">🍳</span> เริ่มที่เรื่องที่ทุกคนรู้กันก่อน — ร้านอาหารตามสั่ง</h2>
+
+  <p class="body-text">อาจารย์อยากให้พวกเราลืมเรื่อง tech ไปสักครู่ — มาคิดถึง <strong>ร้านอาหารตามสั่ง</strong> ที่อยู่ใกล้บ้านแทน</p>
+
+  <p class="body-text">ที่ร้านนั้น คุณเดินเข้าไป มอง <em>เมนู</em> บนผนัง สั่ง "ผัดกะเพราหมูสับ ใส่ไข่ดาว" กับ <em>พนักงานหน้าเคาน์เตอร์</em> เธอตะโกนเข้า<em>ครัว</em> <em>แม่ครัว</em> ใช้<em>สูตร</em>ของร้าน หยิบ<em>วัตถุดิบ</em>จาก<em>ตู้เย็น</em> ทำเสร็จส่งกลับมาให้คุณ</p>
+
+  <div class="pullquote">
+    ใน 30 วินาทีนี้ พวกเราเพิ่งเข้าใจโลก tech ทั้งใบไปแล้ว — <strong>แค่ไม่รู้ตัว</strong>
+  </div>
+
+  <h2 class="section-emoji-h"><span class="emoji">🗺️</span> แผนที่โลก Tech = ร้านอาหารตามสั่ง</h2>
+
+  <table class="map-table">
+    <thead>
+      <tr>
+        <th>ในร้านอาหาร</th>
+        <th>ในโลก Tech</th>
+        <th class="col-desc">อธิบายสั้นๆ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-thai">เมนู + หน้าเคาน์เตอร์</td>
+        <td class="col-tech">Frontend</td>
+        <td class="col-desc">สิ่งที่ผู้ใช้เห็น/กด เช่น หน้าเว็บ ปุ่ม รูปภาพ</td>
+      </tr>
+      <tr>
+        <td class="col-thai">ครัว (ที่ปรุงอาหาร)</td>
+        <td class="col-tech">Backend</td>
+        <td class="col-desc">ส่วนทำงานหลังบ้าน คำนวณ ประมวลผล</td>
+      </tr>
+      <tr>
+        <td class="col-thai">ตู้เย็น + ชั้นเก็บของ</td>
+        <td class="col-tech">Database</td>
+        <td class="col-desc">ที่เก็บข้อมูลทั้งหมด</td>
+      </tr>
+      <tr>
+        <td class="col-thai">ที่อยู่ของร้าน</td>
+        <td class="col-tech"><span class="g-term" data-term="term-hosting">Hosting</span></td>
+        <td class="col-desc">คอมที่เก็บเว็บไว้ให้คนเข้าถึงได้</td>
+      </tr>
+      <tr>
+        <td class="col-thai">ป้ายชื่อร้าน</td>
+        <td class="col-tech">Domain (<span class="g-term" data-term="term-url">URL</span>)</td>
+        <td class="col-desc">เช่น ajarnkwan.github.io</td>
+      </tr>
+      <tr>
+        <td class="col-thai">คนกินที่เดินเข้าร้าน</td>
+        <td class="col-tech"><span class="g-term" data-term="term-browser">Browser</span></td>
+        <td class="col-desc">Chrome / Safari ที่ใช้เปิดเว็บ</td>
+      </tr>
+      <tr>
+        <td class="col-thai">สูตรอาหาร</td>
+        <td class="col-tech">Code</td>
+        <td class="col-desc">คำสั่งที่บอกคอมว่าจะทำอะไร</td>
+      </tr>
+      <tr>
+        <td class="col-thai">แม่ครัว</td>
+        <td class="col-tech">Developer</td>
+        <td class="col-desc">คนเขียน code</td>
+      </tr>
+      <tr>
+        <td class="col-thai">ผู้ช่วยในครัว ✨</td>
+        <td class="col-tech">AI</td>
+        <td class="col-desc">ตัวช่วยที่ทำงานได้หลายอย่าง</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-emoji-h"><span class="emoji">🏪</span> แล้วใน Hi, Builder เราจะเป็นอะไร?</h2>
+
+  <p class="body-text">นี่คือคำถามที่ดีที่สุด — เพราะคำตอบจะทำให้พวกเราเลิกกลัวคำศัพท์เทคที่เห็นในข่าว</p>
+
+  <p class="body-text">ใน Hi, Builder พวกเราจะทำหน้าที่ <strong>เปิดร้านของตัวเอง</strong> — แต่ไม่ใช่ร้านใหญ่ที่มีทุกอย่าง</p>
+
+  <div class="pullquote">
+    Hi, Builder = <strong>"ร้านขายขนมหน้าบ้าน"</strong>
+    <br><br>
+    <em>ไม่มี</em>ครัวใหญ่ <em>ไม่มี</em>ตู้เย็นเก็บของเป็นพันรายการ <em>ไม่ต้อง</em>จ้างแม่ครัว
+    <br>
+    มีแค่ — ขนมที่อร่อย + ป้ายชื่อ + ที่ตั้งให้คนเดินผ่าน
+  </div>
+
+  <p class="body-text">แปลเป็นภาษา tech:</p>
+
+  <table class="builder-table">
+    <thead>
+      <tr>
+        <th width="60"></th>
+        <th>ส่วนของโลก Tech</th>
+        <th>ใน Hi, Builder</th>
+        <th class="col-detail">หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="do">
+        <td class="icon">✅</td>
+        <td class="col-tech">Frontend</td>
+        <td>ทำเอง</td>
+        <td class="col-detail">เว็บที่ผู้ใช้เห็น</td>
+      </tr>
+      <tr class="do">
+        <td class="icon">✅</td>
+        <td class="col-tech"><span class="g-term" data-term="term-hosting">Hosting</span></td>
+        <td><span class="g-term" data-term="term-githubpages">GitHub Pages</span></td>
+        <td class="col-detail">ฟรี ของ Microsoft</td>
+      </tr>
+      <tr class="do">
+        <td class="icon">✅</td>
+        <td class="col-tech">Domain</td>
+        <td><span class="g-term" data-term="term-url">URL</span> จาก GitHub</td>
+        <td class="col-detail">เช่น username.github.io</td>
+      </tr>
+      <tr class="do">
+        <td class="icon">✅</td>
+        <td class="col-tech">Code</td>
+        <td>ใช้ AI ช่วย</td>
+        <td class="col-detail">ไม่ต้องเขียนเองตั้งแต่ต้น</td>
+      </tr>
+      <tr class="dont">
+        <td class="icon">❌</td>
+        <td class="col-tech">Backend</td>
+        <td>ไม่ทำ</td>
+        <td class="col-detail">เว็บทำงานในเครื่องผู้ใช้</td>
+      </tr>
+      <tr class="dont">
+        <td class="icon">❌</td>
+        <td class="col-tech">Database</td>
+        <td>ไม่ทำ</td>
+        <td class="col-detail">ใช้ <span class="g-term" data-term="term-localstorage">localStorage</span> แทน (บทเรียน 6)</td>
+      </tr>
+      <tr class="dont">
+        <td class="icon">❌</td>
+        <td class="col-tech">AI ขั้นสูง</td>
+        <td>ไม่ทำ</td>
+        <td class="col-detail">ใช้ AI ที่มีอยู่แล้ว ไม่สร้างเอง</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="body-text" style="font-size: 0.95rem; color: var(--ink-soft); font-style: italic;">ที่บอก "❌" ไม่ใช่เพราะมันยาก — แต่เพราะ <strong>คอร์สนี้พิสูจน์ก่อนว่า "เริ่มได้"</strong> สิ่งที่ ❌ พวกเราเรียนต่อในอนาคตได้</p>
+
+  <div class="keypoints">
+    <h3>🎤 จุดสำคัญที่ต้องจำ</h3>
+    <ol>
+      <li>
+        <strong>ไม่ต้องรู้ทุกอย่างก่อนเริ่ม</strong>
+        <span>นักเรียน Hi, Builder ที่จบไปจะเข้าใจ tech ทั้งใบมั้ย? ไม่ — แต่จะเข้าใจ "ส่วนของตัวเอง" ดีพอที่จะสร้างของได้</span>
+      </li>
+      <li>
+        <strong>AI = ผู้ช่วยในครัว ไม่ใช่แม่ครัวแทนเรา</strong>
+        <span>AI ทำงานเร็ว แต่ตัดสินใจให้เราไม่ได้ — เรายังต้อง "สั่ง" และ "ตรวจ" (เรื่องตรวจอยู่ใน บทเรียน 4)</span>
+      </li>
+      <li>
+        <strong>คำศัพท์เทคที่ดูยาก = ส่วนหนึ่งของร้าน</strong>
+        <span>ครั้งหน้าได้ยินคำว่า "API" "Server" "Cloud" — ลองนึกว่ามันคือ "ส่วนไหนของร้าน" ส่วนใหญ่จะเดาถูก</span>
+      </li>
+    </ol>
+  </div>
+
+  <!-- QUIZ — 3 questions, must answer all correctly to unlock -->
+  <div class="quiz">
+    <div class="quiz-label">QUICK CHECK</div>
+    <p class="quiz-help">ตอบ 3 คำถามให้ถูกหมดก่อนไป Step ถัดไป — ตอบผิดได้ไม่จำกัดครั้ง</p>
+    <div class="quiz-progress" id="quizProgress">
+      <div class="dot current"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="quiz-counter" id="quizCounter">ข้อ 1 จาก 3</div>
+    <p class="quiz-question" id="quizQuestion"></p>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-final" id="quizFinal">
+      <h4>เก่งมาก! ตอบถูกทั้ง 3 ข้อ 🎉</h4>
+      <p>เข้าใจแล้วว่าโลก tech มีอะไรบ้าง — Step ถัดไปไปดู AI ที่จะใช้กัน</p>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="Hi-Builder_step-1-1.html" class="nav-link nav-prev">
+      <div class="nav-label">← ย้อนกลับ</div>
+      <div class="nav-title">Step 1.1 — Day 1: สวัสดี</div>
+    </a>
+    <a href="#" class="nav-link nav-next locked" id="nextLink">
+      <div class="nav-label">ถัดไป · 🔒</div>
+      <div class="nav-title">Step 1.3 — Tour AI ฟรี →</div>
+    </a>
+  </nav>
+
+</div>
+
+<footer>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="#">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+<script>
+  // 3-question quiz — must answer all correctly
+  const QUIZ_DATA = [
+    {
+      question: 'ในร้านอาหารตามสั่ง เปรียบเทียบ <strong>"Frontend"</strong> กับอะไร?',
+      options: [
+        { text: 'ครัวและแม่ครัว', correct: false },
+        { text: 'หน้าเคาน์เตอร์ + เมนูที่ผนัง', correct: true },
+        { text: 'ตู้เย็นและชั้นเก็บของ', correct: false },
+        { text: 'ป้ายชื่อร้าน', correct: false }
+      ],
+      correctMsg: 'Frontend = "หน้าเคาน์เตอร์ + เมนู" — ส่วนที่ผู้ใช้เห็นและสัมผัสตรงๆ ใน Hi, Builder เราโฟกัสตรงนี้เป็นหลัก',
+      wrongMsgs: [
+        'ลองใหม่นะ 🤔 — Frontend คือสิ่งที่ <strong>ผู้ใช้เห็นและกด</strong> ตรงๆ ไม่ใช่ส่วนหลังบ้านที่ทำงาน',
+        'ยังไม่ใช่ — ลองนึกใหม่ ส่วนไหนของร้านที่ <strong>ลูกค้าเห็นและสัมผัสตรงๆ</strong>',
+        'ใกล้แล้ว! Frontend ในเว็บคือสิ่งที่คุณ <strong>เห็นบนหน้าจอ</strong> — เหมือนอะไรในร้านอาหาร?'
+      ]
+    },
+    {
+      question: 'ในร้านอาหารตามสั่ง — ส่วน <strong>"ครัว"</strong> (ทำอาหารตามออเดอร์) ตรงกับอะไรในโลก tech?',
+      options: [
+        { text: 'Frontend', correct: false },
+        { text: 'Backend', correct: true },
+        { text: 'Database', correct: false },
+        { text: 'User', correct: false }
+      ],
+      correctMsg: 'Backend = "ครัว" — ส่วนที่ทำงานหลังบ้าน รับ order แล้วประมวลผล ผู้ใช้ไม่เห็นโดยตรง',
+      wrongMsgs: [
+        'ยังไม่ใช่ — ครัวเป็นส่วน <strong>หลังบ้าน</strong> ที่ทำงานตามคำสั่ง ลองคิดอีกที',
+        'ลองคิดดู — Database คือ "ตู้เย็น" (เก็บของ), ไม่ใช่ "ครัว" (ทำงาน)',
+        'Hint: Frontend = หน้าบ้าน, ส่วนที่อยู่ <strong>หลังบ้านทำงาน</strong> เรียกว่าอะไร?'
+      ]
+    },
+    {
+      question: 'ใน Hi, Builder พวกเราจะ <strong>โฟกัสที่ส่วนไหน</strong>?',
+      options: [
+        { text: 'Frontend อย่างเดียว', correct: false },
+        { text: 'Backend อย่างเดียว', correct: false },
+        { text: 'ทั้ง 3 ส่วนเท่า ๆ กัน', correct: false },
+        { text: 'Frontend + ใช้ AI ช่วย backend ตอนต้องการ', correct: true }
+      ],
+      correctMsg: 'Hi, Builder เน้น Frontend (ที่คนเห็น) + ให้ AI ช่วยส่วน backend ตอนจำเป็น — เหมาะกับคน 0 ที่อยากสร้างของจริงเร็ว',
+      wrongMsgs: [
+        'คน 0 ที่เริ่มจาก backend อย่างเดียวจะไม่เห็นผลงาน ลองคิดใหม่',
+        'ทำทั้ง 3 ส่วนเท่ากันยากเกินสำหรับ 8 บทเรียน — ลองดูว่าตัวเลือกไหนเน้นอย่างเดียว + ใช้ AI ช่วย',
+        'Hint: Hi, Builder คือคอร์ส "<strong>สร้างเว็บแก้ pain ในยุค AI</strong>" — AI ช่วยเราตรงไหนได้?'
+      ]
+    }
+  ];
+
+  const progressDots = document.querySelectorAll('#quizProgress .dot');
+  const quizCounter = document.getElementById('quizCounter');
+  const quizQuestion = document.getElementById('quizQuestion');
+  const quizOptions = document.getElementById('quizOptions');
+  const quizFeedback = document.getElementById('quizFeedback');
+  const quizFinal = document.getElementById('quizFinal');
+  const nextLink = document.getElementById('nextLink');
+
+  let currentQ = 0;
+  let wrongCount = 0;
+
+  function renderQuestion() {
+    const q = QUIZ_DATA[currentQ];
+    quizCounter.textContent = `ข้อ ${currentQ + 1} จาก ${QUIZ_DATA.length}`;
+    quizQuestion.innerHTML = q.question;
+    quizFeedback.className = 'quiz-feedback';
+    quizFeedback.innerHTML = '';
+    wrongCount = 0;
+
+    // update progress dots
+    progressDots.forEach((dot, i) => {
+      dot.classList.remove('current', 'done');
+      if (i < currentQ) dot.classList.add('done');
+      else if (i === currentQ) dot.classList.add('current');
+    });
+
+    // render options
+    quizOptions.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.dataset.correct = opt.correct ? 'true' : 'false';
+      btn.innerHTML = `<span class="opt-num">${i + 1}</span>${opt.text}`;
+      btn.addEventListener('click', handleAnswer);
+      quizOptions.appendChild(btn);
+    });
+  }
+
+  function handleAnswer(e) {
+    const btn = e.currentTarget;
+    const q = QUIZ_DATA[currentQ];
+    const isCorrect = btn.dataset.correct === 'true';
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      // disable all
+      quizOptions.querySelectorAll('.quiz-option').forEach(o => {
+        o.disabled = true;
+        o.style.cursor = 'default';
+      });
+      quizFeedback.className = 'quiz-feedback correct show';
+      quizFeedback.innerHTML = `✓ <strong>ถูกต้อง!</strong> ${q.correctMsg}`;
+
+      // mark this dot done
+      progressDots[currentQ].classList.remove('current');
+      progressDots[currentQ].classList.add('done');
+
+      // move to next or finish
+      setTimeout(() => {
+        if (currentQ < QUIZ_DATA.length - 1) {
+          currentQ++;
+          renderQuestion();
+          // scroll to keep quiz in view
+          quizQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // ALL DONE
+          quizFinal.classList.add('show');
+          nextLink.classList.remove('locked');
+          nextLink.classList.add('unlocked');
+          nextLink.querySelector('.nav-label').textContent = 'ถัดไป · 🔓';
+          quizFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 1400);
+    } else {
+      btn.classList.add('wrong');
+      btn.disabled = true;
+      quizFeedback.className = 'quiz-feedback wrong show';
+      quizFeedback.innerHTML = q.wrongMsgs[Math.min(wrongCount, q.wrongMsgs.length - 1)];
+      wrongCount++;
+    }
+  }
+
+  renderQuestion();
+</script>
+
+
+<script>
+  // Mini glossary for tooltip previews (short defs only)
+  const GLOSSARY = {
+    'term-html': { name: 'HTML', def: 'ภาษาที่ใช้บอกว่า "เว็บมีอะไร" — โครงกระดูกของหน้าเว็บ' },
+    'term-css': { name: 'CSS', def: 'ภาษาที่ใช้แต่งเว็บให้สวย — สี ฟอนต์ เลย์เอาต์' },
+    'term-js': { name: 'JS (JavaScript)', def: 'ภาษาที่ทำให้เว็บเคลื่อนไหวและตอบโต้' },
+    'term-tag': { name: 'Tag', def: 'ของในวงเล็บมุม <> ที่บอกว่าส่วนนี้คืออะไร — เปิดต้องปิดเป็นคู่' },
+    'term-indexhtml': { name: 'index.html', def: 'ชื่อไฟล์ที่เซิร์ฟเวอร์เปิดเป็นค่าเริ่มต้น — "หน้าแรก" ของเว็บ' },
+    'term-repo': { name: 'Repo (Repository)', def: '"โฟลเดอร์โปรเจกต์" บน GitHub — 1 เว็บ = 1 repo' },
+    'term-commit': { name: 'Commit', def: 'บันทึกการเปลี่ยนแปลงเข้า repo — มี history ดูย้อนได้' },
+    'term-deploy': { name: 'Deploy', def: 'ปล่อยเว็บออกสู่อินเทอร์เน็ต — บน GitHub Pages เกิดอัตโนมัติหลัง commit' },
+    'term-githubpages': { name: 'GitHub Pages', def: 'บริการโฮสต์เว็บฟรีของ GitHub — ใช้ตลอดคอร์ส' },
+    'term-readme': { name: 'README', def: 'ไฟล์คำอธิบายของ repo — ไฟล์แรกที่คนอื่นเห็น' },
+    'term-url': { name: 'URL', def: '"ที่อยู่" ของหน้าเว็บบนอินเทอร์เน็ต' },
+    'term-hosting': { name: 'Hosting', def: 'บริการเก็บไฟล์เว็บบนเซิร์ฟเวอร์ที่เปิด 24 ชั่วโมง' },
+    'term-browser': { name: 'Browser', def: 'โปรแกรมเปิดเว็บ — Chrome, Safari, Edge, Firefox' },
+    'term-localstorage': { name: 'localStorage', def: 'ช่องเก็บข้อมูลในเบราว์เซอร์ — ของไม่หายเมื่อปิดหน้า' },
+    'term-json': { name: 'JSON', def: 'รูปแบบไฟล์เก็บข้อมูลแบบมีโครง — มนุษย์อ่านได้ คอมเข้าใจ' },
+    'term-prompt': { name: 'Prompt', def: 'ข้อความที่พิมพ์/พูดให้ AI — คำสั่ง+คำถาม+บริบท' },
+    'term-asset': { name: 'Asset', def: '"ทุน" ของ Builder — สิ่งที่คุณมีอยู่แล้ว ที่จะใช้สร้างของได้' },
+    'term-portfolio': { name: 'Portfolio', def: 'การรวบรวมผลงาน — ใช้สมัครงาน หาคนซื้อบริการ' }
+  };
+
+  let activeTip = null;
+  function showTip(el, ev) {
+    const id = el.dataset.term;
+    const g = GLOSSARY[id];
+    if (!g) return;
+    if (activeTip) hideTip();
+    const tip = document.createElement('div');
+    tip.className = 'g-tip';
+    tip.innerHTML = `<strong>${g.name}</strong>${g.def}<a href="Hi-Builder_glossary.html#${id}" target="_blank">ดูเต็ม →</a>`;
+    document.body.appendChild(tip);
+    const rect = el.getBoundingClientRect();
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    // adjust if overflow right
+    const tw = 280;
+    if (left + tw > window.innerWidth - 16) left = window.innerWidth - tw - 16;
+    if (left < 16) left = 16;
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    requestAnimationFrame(() => tip.classList.add('show'));
+    activeTip = tip;
+  }
+  function hideTip() {
+    if (!activeTip) return;
+    const t = activeTip;
+    activeTip = null;
+    t.classList.remove('show');
+    setTimeout(() => t.remove(), 150);
+  }
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.g-term');
+    if (t) showTip(t, e);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.g-term');
+    if (t && !e.relatedTarget?.closest('.g-tip')) hideTip();
+  });
+  // Mobile/touch — tap to toggle
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.g-term');
+    if (t) {
+      e.preventDefault();
+      if (activeTip && activeTip.previousMatchEl === t) {
+        hideTip();
+      } else {
+        showTip(t, e);
+        if (activeTip) activeTip.previousMatchEl = t;
+      }
+    } else if (!e.target.closest('.g-tip')) {
+      hideTip();
+    }
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
+</script>
+
+</body>
+</html>

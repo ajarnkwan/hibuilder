@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Step 1.6 — โครงสร้างของเว็บ · Hi, Builder</title>
+<meta name="description" content="HTML / CSS / JS คืออะไร · เล่น playground แก้ code เห็นผลทันที">
+<meta property="og:title" content="Step 1.6 — โครงสร้างของเว็บ · Hi, Builder">
+<meta property="og:description" content="HTML / CSS / JS คืออะไร · เล่น playground แก้ code เห็นผลทันที">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Step 1.6 — โครงสร้างของเว็บ · Hi, Builder">
+<meta name="twitter:description" content="HTML / CSS / JS คืออะไร · เล่น playground แก้ code เห็นผลทันที">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --moss-soft: #d8e0c8;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+    --error: #b54a2a;
+    --error-soft: #f8d7c8;
+    /* Code colors */
+    --code-bg: #1a1814;
+    --code-text: #e8e4d8;
+    --code-tag: #d97757;
+    --code-attr: #d4af37;
+    --code-string: #98c379;
+    --code-comment: #8a8479;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .progress-bar { height: 4px; background: var(--rule); display: flex; }
+  .progress-bar .seg { flex: 1; border-right: 1px solid var(--cream); }
+  .progress-bar .seg:last-child { border-right: none; }
+  .progress-bar .seg.done { background: var(--terra); }
+  .progress-bar .seg.current { background: var(--terra); }
+
+  .crumb {
+    padding: 18px 24px 0;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .crumb a:hover { color: var(--terra); }
+  .crumb .sep { margin: 0 8px; }
+
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+  .step-header {
+    padding: 48px 0 36px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .step-meta-row {
+    display: flex; gap: 16px; align-items: center;
+    margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .step-num-stamp {
+    border: 1.5px solid var(--ink);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .step-time-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+  }
+  .step-time-tag::before { content: "⏱ "; color: var(--terra); }
+  .step-header h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .outcomes-block {
+    margin: 32px 0 32px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .outcomes-block::before {
+    content: "🎯";
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    background: var(--cream);
+    padding: 0 8px;
+    font-size: 1.2rem;
+  }
+  .outcomes-block h3 {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 12px;
+  }
+  .outcomes-block ul { list-style: none; display: grid; gap: 8px; }
+  .outcomes-block li { padding-left: 18px; position: relative; }
+  .outcomes-block li::before {
+    content: "→"; position: absolute; left: 0;
+    color: var(--terra); font-weight: 600;
+  }
+
+  .section-emoji-h {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 56px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.3;
+  }
+  .section-emoji-h .emoji { font-size: 1.4rem; }
+
+  .body-text {
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .body-text strong { background: var(--highlight); padding: 0 4px; font-weight: 500; }
+  .body-text em { font-style: italic; color: var(--terra-deep); }
+  .body-text code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--cream-deep);
+    padding: 1px 6px;
+    font-size: 0.92em;
+    border: 1px solid var(--rule);
+  }
+
+  /* Concept analogy table */
+  .analogy-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    font-size: 0.95rem;
+  }
+  .analogy-table th {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .analogy-table td {
+    padding: 12px 14px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .analogy-table .col-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--terra-deep);
+    font-weight: 600;
+  }
+  .analogy-table .col-restaurant { font-weight: 500; }
+  .analogy-table .col-desc { color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* 3 part visual */
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .layer-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .layer-card .layer-icon { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+  .layer-card .layer-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--terra-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  .layer-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+  .layer-card p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+  @media (max-width: 700px) { .layers { grid-template-columns: 1fr; } }
+
+  /* Anatomy section */
+  .anatomy {
+    margin: 32px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+  }
+  .anatomy-head {
+    background: var(--cream-deep);
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.82rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .anatomy-body {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 0;
+  }
+  .anatomy-code {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    overflow-x: auto;
+  }
+  .anatomy-code .line {
+    display: block;
+    position: relative;
+    padding-left: 24px;
+  }
+  .anatomy-code .line::before {
+    position: absolute;
+    left: 0;
+    color: var(--code-comment);
+    font-size: 0.74rem;
+    width: 18px;
+    text-align: right;
+  }
+  .anatomy-code .ln-1::before { content: "1"; }
+  .anatomy-code .ln-2::before { content: "2"; }
+  .anatomy-code .ln-3::before { content: "3"; }
+  .anatomy-code .ln-4::before { content: "4"; }
+  .anatomy-code .ln-5::before { content: "5"; }
+  .anatomy-code .ln-6::before { content: "6"; }
+  .anatomy-code .ln-7::before { content: "7"; }
+  .anatomy-code .ln-8::before { content: "8"; }
+  .anatomy-code .ln-9::before { content: "9"; }
+  .anatomy-code .ln-10::before { content: "10"; }
+  .tag { color: var(--code-tag); }
+  .attr { color: var(--code-attr); }
+  .str { color: var(--code-string); }
+  .indent-1 { padding-left: calc(24px + 1em) !important; }
+  .indent-2 { padding-left: calc(24px + 2em) !important; }
+  .anatomy-labels {
+    background: var(--cream-deep);
+    padding: 18px 20px;
+    border-left: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.86rem;
+  }
+  .anatomy-labels .label-row {
+    padding: 8px 10px;
+    background: var(--paper);
+    border-left: 3px solid var(--terra);
+  }
+  .anatomy-labels .label-row strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--terra-deep);
+    margin-bottom: 2px;
+  }
+  .anatomy-labels .label-row span { color: var(--ink-soft); font-size: 0.84rem; }
+  @media (max-width: 700px) {
+    .anatomy-body { grid-template-columns: 1fr; }
+    .anatomy-labels { border-left: none; border-top: 1px solid var(--rule); }
+  }
+
+  /* PLAYGROUND — interactive practice */
+  .playground {
+    margin: 40px 0;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    overflow: hidden;
+    box-shadow: 5px 5px 0 var(--terra);
+  }
+  .playground-head {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .playground-head .label {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--terra-soft);
+    text-transform: uppercase;
+  }
+  .playground-head h3 {
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+  }
+  .playground-head .step-indicator {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 3px;
+  }
+  .playground-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .playground-code {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 20px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    border-right: 1px solid var(--ink);
+    min-height: 280px;
+  }
+  .playground-code .line { display: block; }
+  .playground-code .editable {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .playground-code .editable.flash {
+    background: var(--highlight);
+    color: var(--ink);
+  }
+  .playground-preview {
+    padding: 0;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .playground-preview-head {
+    background: #ececec;
+    padding: 6px 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: #666;
+    font-family: monospace;
+  }
+  .playground-preview-head .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .playground-preview-head .dot.r { background: #ff5f56; }
+  .playground-preview-head .dot.y { background: #ffbd2e; }
+  .playground-preview-head .dot.g { background: #27c93f; }
+  .playground-preview iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    min-height: 240px;
+  }
+  @media (max-width: 700px) {
+    .playground-body { grid-template-columns: 1fr; }
+    .playground-code { border-right: none; border-bottom: 1px solid var(--ink); }
+  }
+
+  .playground-controls {
+    padding: 20px 22px;
+    background: var(--cream-deep);
+    border-top: 1px solid var(--ink);
+  }
+  .playground-instruction {
+    font-size: 0.96rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .playground-instruction .pin {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 1px 8px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    margin-right: 4px;
+  }
+  .playground-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .opt-btn {
+    padding: 8px 16px;
+    background: var(--paper);
+    border: 1.5px solid var(--rule);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.12s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .opt-btn:hover { border-color: var(--ink); }
+  .opt-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .opt-btn .swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .playground-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule);
+  }
+  .pg-nav-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .pg-nav-btn:hover { background: var(--ink); color: var(--paper); }
+  .pg-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .pg-nav-btn:disabled:hover { background: transparent; color: var(--ink); }
+  .pg-nav-btn.next { background: var(--ink); color: var(--paper); }
+  .pg-nav-btn.next:hover { background: var(--terra); border-color: var(--terra-deep); }
+  .pg-progress {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+  }
+
+  .playground-finish {
+    padding: 24px 22px;
+    background: var(--moss-soft);
+    border-top: 1px solid var(--moss);
+    text-align: center;
+    display: none;
+  }
+  .playground-finish.show { display: block; }
+  .playground-finish h4 {
+    color: var(--ink);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .playground-finish p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .pullquote {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--paper);
+    border-left: 4px solid var(--terra);
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+  }
+  .pullquote strong { color: var(--ink); font-weight: 600; }
+
+  /* Verify */
+  .verify-yourself {
+    margin: 56px 0 32px;
+    padding: 32px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    text-align: center;
+    position: relative;
+  }
+  .verify-yourself::before {
+    content: "✅";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cream);
+    padding: 0 12px;
+    font-size: 1.5rem;
+  }
+  .verify-yourself h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .verify-yourself .checklist {
+    list-style: none;
+    text-align: left;
+    max-width: 480px;
+    margin: 18px auto 22px;
+    display: grid;
+    gap: 8px;
+  }
+  .verify-yourself .checklist li {
+    padding: 12px 16px;
+    background: var(--cream);
+    border-left: 3px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .verify-yourself .checklist li::before {
+    content: "☐ ";
+    color: var(--ink-faded);
+    margin-right: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+  }
+  .verify-yourself .verify-btn {
+    padding: 14px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1.5px solid var(--ink);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .verify-yourself .verify-btn:hover { background: var(--terra); border-color: var(--terra-deep); }
+  .verify-yourself .verify-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .verify-yourself .verify-msg {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--moss);
+    background: var(--moss-soft);
+    color: var(--ink);
+    font-size: 0.92rem;
+    display: none;
+    text-align: left;
+  }
+  .verify-yourself .verify-msg.show { display: block; }
+
+  .bottom-nav {
+    margin: 56px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    border-top: 2px solid var(--ink);
+  }
+  .nav-link {
+    flex: 1;
+    padding: 18px 22px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    transition: all 0.15s;
+  }
+  .nav-link:hover { background: var(--ink); color: var(--cream); }
+  .nav-link .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .nav-link:hover .nav-label { color: var(--cream); }
+  .nav-link .nav-title { font-weight: 500; font-size: 0.95rem; }
+  .nav-link.locked {
+    opacity: 0.5; cursor: not-allowed;
+    background: transparent; border-style: dashed;
+    pointer-events: none;
+  }
+  .nav-link.unlocked { background: var(--moss-soft); border-color: var(--moss); }
+  .nav-link.unlocked:hover { background: var(--moss); color: var(--paper); }
+  .nav-prev { text-align: left; }
+  .nav-next { text-align: right; }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+
+  /* === GLOSSARY TOOLTIP === */
+  .g-term {
+    border-bottom: 1px dotted var(--terra);
+    cursor: help;
+    position: relative;
+    color: inherit;
+  }
+  .g-term:hover {
+    border-bottom-color: var(--ink);
+    color: var(--terra-deep);
+  }
+  .g-tip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 280px;
+    z-index: 100;
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--terra);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s, transform 0.15s;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  }
+  .g-tip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .g-tip strong { color: var(--terra-soft); display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .g-tip a { color: var(--terra-soft); text-decoration: underline; font-size: 0.78rem; display: block; margin-top: 6px; pointer-events: auto; }
+  .g-tip a:hover { color: var(--cream); }
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="#">เข้าสู่ระบบ</a></div>
+</header>
+
+<div class="progress-bar">
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg done"></div>
+  <div class="seg current"></div>
+  <div class="seg"></div>
+</div>
+
+<div class="crumb">
+  <a href="#">หน้าหลัก</a><span class="sep">/</span><a href="#">Hi, Builder</a><span class="sep">/</span><a href="Hi-Builder_botreuan-1.html">บทเรียน 1</a><span class="sep">/</span>Step 1.6
+</div>
+
+<div class="wrap">
+
+  <section class="step-header">
+    <div class="step-meta-row">
+      <span class="step-num-stamp">STEP 1.6 / 1.7</span>
+      <span class="step-time-tag">20 นาที</span>
+    </div>
+    <h1>โครงสร้างของเว็บ</h1>
+  </section>
+
+  <div class="outcomes-block">
+    <h3>จบ Step นี้คุณจะ</h3>
+    <ul>
+      <li>เข้าใจว่าเว็บประกอบด้วย 3 ส่วน — <span class="g-term" data-term="term-html">HTML</span> / <span class="g-term" data-term="term-css">CSS</span> / <span class="g-term" data-term="term-js">JS</span></li>
+      <li>อ่านโครง <span class="g-term" data-term="term-html">HTML</span> สั้นๆ ได้ — รู้ว่าตรงไหนคือหัวข้อ ตรงไหนคือเนื้อหา</li>
+      <li>เห็นภาพว่าแก้สีไหน เปลี่ยนข้อความตรงไหนของ code</li>
+    </ul>
+  </div>
+
+  <!-- ============== CONCEPT ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🏗️</span> เว็บประกอบด้วยอะไรบ้าง?</h2>
+
+  <p class="body-text">ก่อนใช้ AI สร้างเว็บใน Step ถัดไป — พวกเราต้องรู้ก่อนว่า "เว็บ" จริง ๆ ประกอบด้วยอะไร เพื่อที่ <strong>เวลาขอ AI จะรู้ว่ากำลังขออะไร</strong></p>
+
+  <p class="body-text">เว็บทุกหน้า — จาก Facebook ถึง Google ถึงเว็บที่พวกเรากำลังเปิดอยู่ — ล้วนสร้างจาก <strong>3 ภาษา</strong> ที่ทำงานคนละหน้าที่:</p>
+
+  <div class="layers">
+    <div class="layer-card">
+      <span class="layer-icon">🦴</span>
+      <div class="layer-name"><span class="g-term" data-term="term-html">HTML</span></div>
+      <h3>โครงกระดูก</h3>
+      <p>บอกว่ามีอะไรอยู่ตรงไหน — หัวข้อ ย่อหน้า รูป ปุ่ม</p>
+    </div>
+    <div class="layer-card">
+      <span class="layer-icon">🎨</span>
+      <div class="layer-name"><span class="g-term" data-term="term-css">CSS</span></div>
+      <h3>เสื้อผ้า</h3>
+      <p>บอกว่าหน้าตาเป็นไง — สี ฟอนต์ ระยะห่าง ขนาด</p>
+    </div>
+    <div class="layer-card">
+      <span class="layer-icon">⚡</span>
+      <div class="layer-name"><span class="g-term" data-term="term-js">JS</span></div>
+      <h3>การเคลื่อนไหว</h3>
+      <p>บอกว่ากดปุ่มแล้วเกิดอะไร — เปลี่ยนหน้า บันทึก คำนวณ</p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <strong>ย้อนไป Step 1.2 — เปรียบเทียบกับร้านอาหาร:</strong>
+    <br><br>
+    <span class="g-term" data-term="term-html">HTML</span> = <em>เมนูที่บอกว่าร้านมีอะไร</em><br>
+    <span class="g-term" data-term="term-css">CSS</span> = <em>การตกแต่งร้าน สี ป้าย</em><br>
+    <span class="g-term" data-term="term-js">JS</span> = <em>คำสั่งที่ลูกค้ากด → แม่ครัวทำตาม</em>
+  </div>
+
+  <p class="body-text">ใน Hi, Builder บทเรียน 1 พวกเราจะใช้ <strong><span class="g-term" data-term="term-html">HTML</span> เป็นหลัก</strong> — เพราะเริ่มต้นได้ง่ายสุด <span class="g-term" data-term="term-css">CSS</span> กับ <span class="g-term" data-term="term-js">JS</span> จะเรียนต่อในบทถัดๆ ไป</p>
+
+  <!-- ============== ANATOMY ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🔬</span> ผ่า <span class="g-term" data-term="term-html">HTML</span> สั้นๆ ดู</h2>
+
+  <p class="body-text">ดู <span class="g-term" data-term="term-html">HTML</span> 10 บรรทัดนี้ — โครงเว็บที่ง่ายที่สุดในโลก</p>
+
+  <div class="anatomy">
+    <div class="anatomy-head">โครงพื้นฐานของหน้าเว็บ</div>
+    <div class="anatomy-body">
+      <div class="anatomy-code">
+<span class="line ln-1"><span class="tag">&lt;!DOCTYPE html&gt;</span></span>
+<span class="line ln-2"><span class="tag">&lt;html&gt;</span></span>
+<span class="line ln-3 indent-1"><span class="tag">&lt;head&gt;</span></span>
+<span class="line ln-4 indent-2"><span class="tag">&lt;title&gt;</span>เว็บของฉัน<span class="tag">&lt;/title&gt;</span></span>
+<span class="line ln-5 indent-1"><span class="tag">&lt;/head&gt;</span></span>
+<span class="line ln-6 indent-1"><span class="tag">&lt;body&gt;</span></span>
+<span class="line ln-7 indent-2"><span class="tag">&lt;h1&gt;</span>สวัสดี<span class="tag">&lt;/h1&gt;</span></span>
+<span class="line ln-8 indent-2"><span class="tag">&lt;p&gt;</span>นี่คือเว็บแรกของฉัน<span class="tag">&lt;/p&gt;</span></span>
+<span class="line ln-9 indent-1"><span class="tag">&lt;/body&gt;</span></span>
+<span class="line ln-10"><span class="tag">&lt;/html&gt;</span></span>
+      </div>
+      <div class="anatomy-labels">
+        <div class="label-row">
+          <strong>&lt;!DOCTYPE html&gt;</strong>
+          <span>บอกเบราว์เซอร์ "นี่คือ <span class="g-term" data-term="term-html">HTML</span> นะ"</span>
+        </div>
+        <div class="label-row">
+          <strong>&lt;head&gt;</strong>
+          <span>ข้อมูลเบื้องหลัง (ชื่อหน้า, font)</span>
+        </div>
+        <div class="label-row">
+          <strong>&lt;body&gt;</strong>
+          <span>ของที่คนจะ "เห็น"</span>
+        </div>
+        <div class="label-row">
+          <strong>&lt;h1&gt;</strong>
+          <span>หัวข้อใหญ่</span>
+        </div>
+        <div class="label-row">
+          <strong>&lt;p&gt;</strong>
+          <span>ย่อหน้า ข้อความ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="body-text">ของพวกนี้ในวงเล็บมุม <code>&lt; &gt;</code> เรียกว่า <strong>"<span class="g-term" data-term="term-tag">tag</span>"</strong> — เป็นเหมือน "ป้ายชื่อ" บอกเบราว์เซอร์ว่า <em>ส่วนนี้คืออะไร</em>: <code>&lt;h1&gt;</code> = หัวข้อ, <code>&lt;p&gt;</code> = ย่อหน้า, <code>&lt;body&gt;</code> = เนื้อหาหลัก</p>
+
+  <p class="body-text">สังเกตว่า <span class="g-term" data-term="term-tag">tag</span> ทุกตัว <strong>มีคู่</strong> — เปิด <code>&lt;p&gt;</code> ต้องปิด <code>&lt;/p&gt;</code> (มีขีดทับ <code>/</code> นำหน้า) — เหมือนวงเล็บที่ต้องปิด</p>
+
+  <!-- ============== PLAYGROUND ============== -->
+  <h2 class="section-emoji-h"><span class="emoji">🎮</span> ลองแก้ดู — เห็นผลทันที</h2>
+
+  <p class="body-text">เลือกปุ่มข้างล่าง → ดู code ที่ <span style="background: var(--terra); color: var(--paper); padding: 1px 6px; border-radius: 3px; font-family: 'IBM Plex Mono', monospace;">ไฮไลท์ส้ม</span> เปลี่ยน → ดูเว็บข้างขวาเปลี่ยนตาม</p>
+
+  <div class="playground" id="playground">
+    <div class="playground-head">
+      <span class="label">PLAYGROUND</span>
+      <h3 id="pgTitle">ลองที่ 1: เปลี่ยนหัวข้อ</h3>
+      <span class="step-indicator" id="pgStep">1/4</span>
+    </div>
+    <div class="playground-body">
+      <div class="playground-code">
+<span class="line">&lt;<span class="tag">!DOCTYPE</span> html&gt;</span>
+<span class="line">&lt;<span class="tag">html</span>&gt;</span>
+<span class="line">&lt;<span class="tag">body</span> <span class="attr">style</span>=<span class="str">"background:<span class="editable" id="ed-bg">white</span>"</span>&gt;</span>
+<span class="line">&nbsp;&nbsp;&lt;<span class="tag">h1</span> <span class="attr">style</span>=<span class="str">"color:<span class="editable" id="ed-color">black</span>"</span>&gt;<span class="editable" id="ed-text">สวัสดี</span>&lt;/<span class="tag">h1</span>&gt;</span>
+<span class="line">&nbsp;&nbsp;&lt;<span class="tag">p</span>&gt;<span class="editable" id="ed-para">นี่คือเว็บแรก</span>&lt;/<span class="tag">p</span>&gt;</span>
+<span class="line">&lt;/<span class="tag">body</span>&gt;</span>
+<span class="line">&lt;/<span class="tag">html</span>&gt;</span>
+      </div>
+      <div class="playground-preview">
+        <div class="playground-preview-head">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span style="margin-left: 6px;">preview</span>
+        </div>
+        <iframe id="previewFrame" srcdoc=""></iframe>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <p class="playground-instruction" id="pgInstruction">
+        <span class="pin">บรรทัด 4</span>เปลี่ยนหัวข้อจาก "สวัสดี" เป็นอะไรก็ได้:
+      </p>
+      <div class="playground-options" id="pgOptions">
+        <!-- buttons populated by JS -->
+      </div>
+      <div class="playground-nav">
+        <button class="pg-nav-btn" id="pgPrev" disabled>← ย้อน</button>
+        <span class="pg-progress" id="pgProgress">ลองที่ 1 จาก 4</span>
+        <button class="pg-nav-btn next" id="pgNext">ต่อไป →</button>
+      </div>
+    </div>
+
+    <div class="playground-finish" id="pgFinish">
+      <h4>เก่งมาก! 🎉</h4>
+      <p>เห็นแล้วว่า "แก้ตรงไหน" ทำให้ "อะไรเปลี่ยน" — พร้อมไปสร้างเว็บจริงใน Step ถัดไป</p>
+    </div>
+  </div>
+
+  <p class="body-text" style="margin-top: 32px;">เห็นภาพแล้วใช่ไหม? — เว็บไม่ใช่อะไรลึกลับ <strong>มันคือ text ในโครงที่กำหนดไว้</strong> เปลี่ยน text → เว็บเปลี่ยน</p>
+
+  <p class="body-text">ใน Step 1.7 ถัดไป พวกเราจะ <em>ไม่ต้อง</em>เขียน <span class="g-term" data-term="term-html">HTML</span> เองทีละบรรทัด — เราจะให้ AI สร้างให้ แต่พอเข้าใจโครงแล้ว <strong>เวลา AI ส่งมา พวกเราจะอ่านได้ว่ามีอะไรอยู่ตรงไหน + แก้ได้เอง</strong></p>
+
+  <!-- VERIFY -->
+  <div class="verify-yourself">
+    <h3>เช็คตัวเองก่อนไป Step 1.7</h3>
+    <p style="color: var(--ink-soft); font-size: 0.95rem;">ติ๊กในใจว่าเข้าใจหรือยัง</p>
+    <ul class="checklist">
+      <li>เข้าใจว่าเว็บมี 3 ส่วน — <span class="g-term" data-term="term-html">HTML</span>/<span class="g-term" data-term="term-css">CSS</span>/<span class="g-term" data-term="term-js">JS</span> — แต่ละส่วนทำหน้าที่ต่างกัน</li>
+      <li>อ่าน <span class="g-term" data-term="term-html">HTML</span> 10 บรรทัดแล้วบอกได้ว่าตรงไหนคือหัวข้อ ตรงไหนคือย่อหน้า</li>
+      <li>ลองเล่น playground ครบ 4 ลอง</li>
+    </ul>
+    <button class="verify-btn" id="verifyBtn">เข้าใจแล้ว ไป Step 1.7 ✓</button>
+    <div class="verify-msg" id="verifyMsg">
+      <strong>เยี่ยม! 🎉</strong> พร้อมแล้ว — Step 1.7 พวกเราจะให้ AI สร้าง HTML ให้ <strong>และเพราะพวกเราเข้าใจโครงแล้ว เปิดดูจะรู้ว่า AI ใส่อะไรไว้ตรงไหน</strong> ไม่ใช่แค่ copy-paste โง่ ๆ
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="Hi-Builder_step-1-5.html" class="nav-link nav-prev">
+      <div class="nav-label">← ย้อนกลับ</div>
+      <div class="nav-title">Step 1.5 — <span class="g-term" data-term="term-asset">Asset</span> Map</div>
+    </a>
+    <a href="Hi-Builder_step-1-7.html" class="nav-link nav-next locked" id="nextLink">
+      <div class="nav-label">ถัดไป · 🔒</div>
+      <div class="nav-title">Step 1.7 — สร้าง <span class="g-term" data-term="term-url">URL</span> แรก →</div>
+    </a>
+  </nav>
+
+</div>
+
+<footer>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="#">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+<script>
+  // Playground state
+  const state = {
+    text: 'สวัสดี',
+    color: 'black',
+    bg: 'white',
+    para: 'นี่คือเว็บแรก'
+  };
+
+  // Trials config
+  const trials = [
+    {
+      title: 'ลองที่ 1: เปลี่ยนหัวข้อ',
+      pin: 'บรรทัด 4',
+      instruction: 'เปลี่ยนหัวข้อจาก "สวัสดี" เป็นอะไรก็ได้:',
+      target: 'text',
+      options: [
+        { label: 'สวัสดี Builder', value: 'สวัสดี Builder' },
+        { label: 'นี่คือเว็บของฉัน', value: 'นี่คือเว็บของฉัน' },
+        { label: 'ยินดีต้อนรับ 👋', value: 'ยินดีต้อนรับ 👋' },
+        { label: 'Hello!', value: 'Hello!' }
+      ]
+    },
+    {
+      title: 'ลองที่ 2: เปลี่ยนสีหัวข้อ',
+      pin: 'บรรทัด 4',
+      instruction: 'เปลี่ยนสีของหัวข้อ — ดูใน CSS ที่เขียนว่า color:',
+      target: 'color',
+      options: [
+        { label: 'น้ำเงิน', value: '#2563eb', swatch: '#2563eb' },
+        { label: 'แดง', value: '#dc2626', swatch: '#dc2626' },
+        { label: 'เขียว', value: '#16a34a', swatch: '#16a34a' },
+        { label: 'ส้ม', value: '#ea580c', swatch: '#ea580c' }
+      ]
+    },
+    {
+      title: 'ลองที่ 3: เปลี่ยนสีพื้นหลัง',
+      pin: 'บรรทัด 3',
+      instruction: 'เปลี่ยนสีพื้นหลังของหน้าเว็บ — ดูใน CSS ที่เขียนว่า background:',
+      target: 'bg',
+      options: [
+        { label: 'ครีม', value: '#fafaf3', swatch: '#fafaf3' },
+        { label: 'ฟ้าอ่อน', value: '#dbeafe', swatch: '#dbeafe' },
+        { label: 'ชมพูอ่อน', value: '#fce7f3', swatch: '#fce7f3' },
+        { label: 'เหลืองอ่อน', value: '#fef3c7', swatch: '#fef3c7' }
+      ]
+    },
+    {
+      title: 'ลองที่ 4: เปลี่ยนย่อหน้า',
+      pin: 'บรรทัด 5',
+      instruction: 'เปลี่ยนข้อความในย่อหน้า:',
+      target: 'para',
+      options: [
+        { label: 'ฉันกำลังเรียน Hi, Builder', value: 'ฉันกำลังเรียน Hi, Builder' },
+        { label: 'เว็บแรกของฉันใน 1 ชั่วโมง', value: 'เว็บแรกของฉันใน 1 ชั่วโมง' },
+        { label: 'นี่คือผลงานสด ๆ ร้อน ๆ', value: 'นี่คือผลงานสด ๆ ร้อน ๆ' },
+        { label: 'อาจารย์ขวัญสอนสร้างเว็บ', value: 'อาจารย์ขวัญสอนสร้างเว็บ' }
+      ]
+    }
+  ];
+
+  let currentTrial = 0;
+  const completedTrials = new Set();
+
+  const pgTitle = document.getElementById('pgTitle');
+  const pgStep = document.getElementById('pgStep');
+  const pgInstruction = document.getElementById('pgInstruction');
+  const pgOptions = document.getElementById('pgOptions');
+  const pgPrev = document.getElementById('pgPrev');
+  const pgNext = document.getElementById('pgNext');
+  const pgProgress = document.getElementById('pgProgress');
+  const pgFinish = document.getElementById('pgFinish');
+  const previewFrame = document.getElementById('previewFrame');
+
+  function updatePreview() {
+    const html = `<!DOCTYPE html><html><head><style>body{margin:0;padding:24px;font-family:system-ui,-apple-system,sans-serif;background:${state.bg};transition:background 0.3s}h1{color:${state.color};margin:0 0 12px;transition:color 0.3s}p{color:#444;margin:0;line-height:1.5}</style></head><body><h1>${state.text}</h1><p>${state.para}</p></body></html>`;
+    previewFrame.srcdoc = html;
+  }
+
+  function updateCodeDisplay() {
+    document.getElementById('ed-bg').textContent = state.bg;
+    document.getElementById('ed-color').textContent = state.color;
+    document.getElementById('ed-text').textContent = state.text;
+    document.getElementById('ed-para').textContent = state.para;
+  }
+
+  function flashEdit(target) {
+    const map = { text: 'ed-text', color: 'ed-color', bg: 'ed-bg', para: 'ed-para' };
+    const el = document.getElementById(map[target]);
+    if (el) {
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 500);
+    }
+  }
+
+  function renderTrial() {
+    const t = trials[currentTrial];
+    pgTitle.textContent = t.title;
+    pgStep.textContent = `${currentTrial + 1}/${trials.length}`;
+    pgProgress.textContent = `ลองที่ ${currentTrial + 1} จาก ${trials.length}`;
+    pgInstruction.innerHTML = `<span class="pin">${t.pin}</span>${t.instruction}`;
+
+    pgOptions.innerHTML = '';
+    t.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.innerHTML = opt.swatch
+        ? `<span class="swatch" style="background:${opt.swatch}"></span>${opt.label}`
+        : opt.label;
+      btn.addEventListener('click', () => {
+        state[t.target] = opt.value;
+        updateCodeDisplay();
+        updatePreview();
+        flashEdit(t.target);
+        // mark active
+        document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        completedTrials.add(currentTrial);
+      });
+      pgOptions.appendChild(btn);
+    });
+
+    pgPrev.disabled = currentTrial === 0;
+    pgNext.textContent = currentTrial === trials.length - 1 ? 'จบ ✓' : 'ต่อไป →';
+  }
+
+  pgPrev.addEventListener('click', () => {
+    if (currentTrial > 0) {
+      currentTrial--;
+      renderTrial();
+    }
+  });
+
+  pgNext.addEventListener('click', () => {
+    if (currentTrial < trials.length - 1) {
+      currentTrial++;
+      renderTrial();
+    } else {
+      pgFinish.classList.add('show');
+      pgFinish.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  // Init
+  renderTrial();
+  updatePreview();
+
+  // Verify
+  const verifyBtn = document.getElementById('verifyBtn');
+  const verifyMsg = document.getElementById('verifyMsg');
+  const nextLink = document.getElementById('nextLink');
+  verifyBtn.addEventListener('click', () => {
+    verifyBtn.disabled = true;
+    verifyBtn.textContent = '✓ พร้อมไปต่อ';
+    verifyMsg.classList.add('show');
+    nextLink.classList.remove('locked');
+    nextLink.classList.add('unlocked');
+    nextLink.querySelector('.nav-label').textContent = 'ถัดไป · 🔓';
+  });
+</script>
+
+
+<script>
+  // Mini glossary for tooltip previews (short defs only)
+  const GLOSSARY = {
+    'term-html': { name: 'HTML', def: 'ภาษาที่ใช้บอกว่า "เว็บมีอะไร" — โครงกระดูกของหน้าเว็บ' },
+    'term-css': { name: 'CSS', def: 'ภาษาที่ใช้แต่งเว็บให้สวย — สี ฟอนต์ เลย์เอาต์' },
+    'term-js': { name: 'JS (JavaScript)', def: 'ภาษาที่ทำให้เว็บเคลื่อนไหวและตอบโต้' },
+    'term-tag': { name: 'Tag', def: 'ของในวงเล็บมุม <> ที่บอกว่าส่วนนี้คืออะไร — เปิดต้องปิดเป็นคู่' },
+    'term-indexhtml': { name: 'index.html', def: 'ชื่อไฟล์ที่เซิร์ฟเวอร์เปิดเป็นค่าเริ่มต้น — "หน้าแรก" ของเว็บ' },
+    'term-repo': { name: 'Repo (Repository)', def: '"โฟลเดอร์โปรเจกต์" บน GitHub — 1 เว็บ = 1 repo' },
+    'term-commit': { name: 'Commit', def: 'บันทึกการเปลี่ยนแปลงเข้า repo — มี history ดูย้อนได้' },
+    'term-deploy': { name: 'Deploy', def: 'ปล่อยเว็บออกสู่อินเทอร์เน็ต — บน GitHub Pages เกิดอัตโนมัติหลัง commit' },
+    'term-githubpages': { name: 'GitHub Pages', def: 'บริการโฮสต์เว็บฟรีของ GitHub — ใช้ตลอดคอร์ส' },
+    'term-readme': { name: 'README', def: 'ไฟล์คำอธิบายของ repo — ไฟล์แรกที่คนอื่นเห็น' },
+    'term-url': { name: 'URL', def: '"ที่อยู่" ของหน้าเว็บบนอินเทอร์เน็ต' },
+    'term-hosting': { name: 'Hosting', def: 'บริการเก็บไฟล์เว็บบนเซิร์ฟเวอร์ที่เปิด 24 ชั่วโมง' },
+    'term-browser': { name: 'Browser', def: 'โปรแกรมเปิดเว็บ — Chrome, Safari, Edge, Firefox' },
+    'term-localstorage': { name: 'localStorage', def: 'ช่องเก็บข้อมูลในเบราว์เซอร์ — ของไม่หายเมื่อปิดหน้า' },
+    'term-json': { name: 'JSON', def: 'รูปแบบไฟล์เก็บข้อมูลแบบมีโครง — มนุษย์อ่านได้ คอมเข้าใจ' },
+    'term-prompt': { name: 'Prompt', def: 'ข้อความที่พิมพ์/พูดให้ AI — คำสั่ง+คำถาม+บริบท' },
+    'term-asset': { name: 'Asset', def: '"ทุน" ของ Builder — สิ่งที่คุณมีอยู่แล้ว ที่จะใช้สร้างของได้' },
+    'term-portfolio': { name: 'Portfolio', def: 'การรวบรวมผลงาน — ใช้สมัครงาน หาคนซื้อบริการ' }
+  };
+
+  let activeTip = null;
+  function showTip(el, ev) {
+    const id = el.dataset.term;
+    const g = GLOSSARY[id];
+    if (!g) return;
+    if (activeTip) hideTip();
+    const tip = document.createElement('div');
+    tip.className = 'g-tip';
+    tip.innerHTML = `<strong>${g.name}</strong>${g.def}<a href="Hi-Builder_glossary.html#${id}" target="_blank">ดูเต็ม →</a>`;
+    document.body.appendChild(tip);
+    const rect = el.getBoundingClientRect();
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    // adjust if overflow right
+    const tw = 280;
+    if (left + tw > window.innerWidth - 16) left = window.innerWidth - tw - 16;
+    if (left < 16) left = 16;
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    requestAnimationFrame(() => tip.classList.add('show'));
+    activeTip = tip;
+  }
+  function hideTip() {
+    if (!activeTip) return;
+    const t = activeTip;
+    activeTip = null;
+    t.classList.remove('show');
+    setTimeout(() => t.remove(), 150);
+  }
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.g-term');
+    if (t) showTip(t, e);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.g-term');
+    if (t && !e.relatedTarget?.closest('.g-tip')) hideTip();
+  });
+  // Mobile/touch — tap to toggle
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.g-term');
+    if (t) {
+      e.preventDefault();
+      if (activeTip && activeTip.previousMatchEl === t) {
+        hideTip();
+      } else {
+        showTip(t, e);
+        if (activeTip) activeTip.previousMatchEl = t;
+      }
+    } else if (!e.target.closest('.g-tip')) {
+      hideTip();
+    }
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
+</script>
+
+</body>
+</html>

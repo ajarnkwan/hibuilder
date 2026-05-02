@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>เกี่ยวกับ Hi, Builder · ผศ.ดร.ขวัญ เพชรสว่าง</title>
+<meta name="description" content="Hi, Builder คอร์สสอนสร้างเว็บ + แอปด้วย AI สำหรับคนเริ่มจาก 0 — สอนโดย ผศ.ดร.ขวัญ เพชรสว่าง อาจารย์เศรษฐศาสตร์ ม.รามคำแหง">
+<meta property="og:title" content="เกี่ยวกับ Hi, Builder">
+<meta property="og:description" content="คอร์สสอนสร้างเว็บ + แอปด้วย AI สำหรับคนเริ่มจาก 0">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --moss-soft: #d8e0c8;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: var(--terra); text-decoration: none; }
+  a:hover { color: var(--terra-deep); text-decoration: underline; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; color: var(--ink); }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .brand-text a { color: inherit; text-decoration: none; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); color: var(--ink); font-size: 0.85rem; }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); text-decoration: none; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    padding: 56px 0 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--terra);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: inline-block;
+    border: 1px solid var(--terra);
+    padding: 6px 14px;
+    transform: rotate(-1deg);
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .hero p { color: var(--ink-soft); font-size: 1.05rem; max-width: 540px; margin: 0 auto; }
+
+  .section { margin: 56px 0; }
+  .section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section h2 .emoji { font-size: 1.4rem; }
+  .section p {
+    margin-bottom: 16px;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+  .section p strong { background: var(--highlight); padding: 0 4px; font-weight: 500; }
+  .section p em { font-style: italic; color: var(--terra-deep); }
+
+  .ajarn-card {
+    margin: 32px 0;
+    padding: 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--rule);
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .ajarn-portrait {
+    width: 100px;
+    height: 100px;
+    background: var(--cream-deep);
+    border: 1px dashed var(--ink-faded);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-faded);
+    font-size: 0.78rem;
+    text-align: center;
+    font-style: italic;
+    padding: 8px;
+  }
+  .ajarn-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ajarn-title {
+    font-size: 0.92rem;
+    color: var(--ink-faded);
+    margin-bottom: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .ajarn-bio { font-size: 0.96rem; color: var(--ink-soft); line-height: 1.6; }
+  @media (max-width: 600px) {
+    .ajarn-card { grid-template-columns: 1fr; }
+    .ajarn-portrait { margin: 0 auto; }
+  }
+
+  .pull-quote {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--paper);
+    border-left: 4px solid var(--terra);
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .pull-quote .author {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: var(--ink-faded);
+    font-style: normal;
+  }
+
+  .reasons {
+    list-style: none;
+    display: grid;
+    gap: 18px;
+    margin: 24px 0;
+  }
+  .reason {
+    padding: 18px 22px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--terra);
+  }
+  .reason strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .reason span { color: var(--ink-soft); font-size: 0.96rem; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .contact-card {
+    padding: 16px 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    transition: border-color 0.15s;
+  }
+  .contact-card:hover { border-color: var(--ink); }
+  .contact-card .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .contact-card .handle { font-size: 0.96rem; font-weight: 500; }
+
+  .cta-block {
+    margin: 56px 0 32px;
+    padding: 32px 28px;
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+  }
+  .cta-block h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 8px; color: var(--cream); }
+  .cta-block p { color: var(--rule); margin-bottom: 18px; }
+  .cta-block .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--terra);
+    color: var(--paper);
+    border: 1.5px solid var(--terra-deep);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .cta-block .btn:hover { background: var(--terra-deep); color: var(--paper); text-decoration: none; }
+
+  footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text"><a href="Hi-Builder_landing.html">Hi, Builder</a><span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="Hi-Builder_botreuan-1.html">เริ่มเรียน →</a></div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <span class="hero-tag">📖 ABOUT</span>
+    <h1>ทำไม Hi, Builder ถึงเกิดขึ้น</h1>
+    <p>เรื่องเล่าของคอร์สนี้ + คนที่สอน + เป้าหมายที่อยากเห็น</p>
+  </section>
+
+  <section class="section">
+    <h2><span class="emoji">👨‍🏫</span> ใครเป็นคนสอน?</h2>
+
+    <div class="ajarn-card">
+      <div class="ajarn-portrait">[ รูปอาจารย์ขวัญ ]</div>
+      <div>
+        <div class="ajarn-name">ผศ.ดร.ขวัญ เพชรสว่าง</div>
+        <div class="ajarn-title">Asst. Prof. Dr. Kwan Phetsawang</div>
+        <p class="ajarn-bio">อาจารย์ประจำคณะเศรษฐศาสตร์ มหาวิทยาลัยรามคำแหง สอนและวิจัยด้านเศรษฐศาสตร์และตลาดแรงงาน — ในเวลาเดียวกันก็เป็น "Builder" ที่ใช้ AI สร้าง EdTech ส่งความรู้ให้คน 0</p>
+      </div>
+    </div>
+
+    <p>อาจารย์ขวัญทำคอนเทนต์การศึกษาภายใต้ชื่อ <strong>Ajarn Kwan</strong> ครอบคลุมเรื่องเศรษฐศาสตร์ การเงิน AI และศัพท์อังกฤษเศรษฐศาสตร์พื้นฐาน — เผยแพร่บน TikTok, Facebook, GitHub และ Line OA</p>
+  </section>
+
+  <section class="section">
+    <h2><span class="emoji">🌱</span> ทำไมต้องสร้าง Hi, Builder?</h2>
+
+    <p>ตอนยุค AI มาถึงพร้อมกัน — มี 2 กลุ่มคนที่อาจารย์เห็นและกังวล:</p>
+
+    <ol class="reasons">
+      <li class="reason">
+        <strong>กลุ่ม 1: คนที่กลัว AI</strong>
+        <span>"AI จะแทนที่ฉัน" → กลายเป็นความเครียด ไม่กล้าใช้ ปฏิเสธทุกอย่างที่เกี่ยวกับเทค</span>
+      </li>
+      <li class="reason">
+        <strong>กลุ่ม 2: คนที่ใช้ AI แต่ไม่ได้สร้างของ</strong>
+        <span>ใช้ AI ตอบคำถาม สั่งงานเล็กๆ น้อยๆ — แต่ไม่เคยใช้สร้างของที่แก้ปัญหาในชีวิตจริง</span>
+      </li>
+    </ol>
+
+    <div class="pull-quote">
+      "คนที่ได้เปรียบในยุคนี้ไม่ใช่คนเก่งเทคที่สุด แต่คือคนที่กล้าเริ่มก่อน"
+      <span class="author">— อาจารย์ขวัญ</span>
+    </div>
+
+    <p>Hi, Builder จึงออกแบบสำหรับ <strong>"คน 0" ที่ไม่มีพื้นเทค</strong> — แต่อยากเปลี่ยนจากผู้บริโภค → ผู้สร้าง <em>ใช้ AI เป็นเครื่องมือ ไม่ใช่ภัยคุกคาม</em></p>
+  </section>
+
+  <section class="section">
+    <h2><span class="emoji">🎯</span> เป้าหมายของคอร์ส</h2>
+
+    <p>จบ 8 บทเรียน ผู้เรียนจะมี:</p>
+
+    <ol class="reasons">
+      <li class="reason">
+        <strong>เว็บ + แอปบนมือถือ ที่แก้ปัญหาจริงในชีวิต</strong>
+        <span>ไม่ใช่ "Hello World" แต่เป็นของที่ใช้ทุกวัน</span>
+      </li>
+      <li class="reason">
+        <strong>มุมมอง Critical AI</strong>
+        <span>รู้ทันการโกหก/ผิดพลาดของ AI — ใช้เป็น verify เป็น</span>
+      </li>
+      <li class="reason">
+        <strong>Asset Map ของตัวเอง</strong>
+        <span>เข้าใจของที่ตัวเองมี — ทุนที่จะใช้สร้างต่อในอนาคต</span>
+      </li>
+      <li class="reason">
+        <strong>Cert + Portfolio รวมกัน</strong>
+        <span>ใบ cert ที่มี screenshot เว็บจริง + ลิงก์ — ใช้สมัครงานได้</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2><span class="emoji">💡</span> ปรัชญา 3 ข้อ</h2>
+
+    <ol class="reasons">
+      <li class="reason">
+        <strong>1. Asset-first</strong>
+        <span>เริ่มจาก "ของที่มีอยู่แล้ว" ไม่ใช่ "ของที่ต้องไปหา" — Bird in hand principle จาก Effectuation</span>
+      </li>
+      <li class="reason">
+        <strong>2. Builder &gt; Consumer</strong>
+        <span>คอร์สนี้สอน "สร้าง" ไม่ใช่แค่ "ใช้" — เพื่อนเก่งใช้ AI ฉันก็ใช้ตามได้ แต่จะไม่เก่งกว่า</span>
+      </li>
+      <li class="reason">
+        <strong>3. Working &gt; Perfect</strong>
+        <span>ของที่ใช้ได้ดีกว่าของในใจ — ปล่อยก่อน ปรับทีหลัง</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2><span class="emoji">📬</span> ติดต่อ</h2>
+
+    <p>มีคำถาม ติดปัญหา หรืออยากให้ feedback คอร์ส — ทักได้ทุกช่อง:</p>
+
+    <div class="contact-grid">
+      <a href="https://www.facebook.com/ajarnkwan" class="contact-card" target="_blank">
+        <div class="label">FACEBOOK</div>
+        <div class="handle">facebook.com/ajarnkwan</div>
+      </a>
+      <a href="https://www.tiktok.com/@ajarn.kwan" class="contact-card" target="_blank">
+        <div class="label">TIKTOK</div>
+        <div class="handle">@ajarn.kwan</div>
+      </a>
+      <a href="#" class="contact-card">
+        <div class="label">LINE OA</div>
+        <div class="handle">[ Line OA link ]</div>
+      </a>
+      <a href="#" class="contact-card">
+        <div class="label">DISCORD</div>
+        <div class="handle">[ Discord invite link ]</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="cta-block">
+    <h3>พร้อมเป็น Early Builder รุ่นแรก?</h3>
+    <p>บทเรียน 1 พร้อมแล้ว · ใช้เวลา 10 นาทีก็เริ่มได้</p>
+    <a href="Hi-Builder_botreuan-1.html" class="btn">เริ่มบทเรียน 1 →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="Hi-Builder_landing.html">หน้าหลัก</a>
+    <a href="Hi-Builder_glossary.html">Glossary</a>
+    <a href="https://www.facebook.com/ajarnkwan">Facebook</a>
+    <a href="https://www.tiktok.com/@ajarn.kwan">TikTok</a>
+    <a href="Hi-Builder_privacy.html">Privacy</a>
+  </div>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="Hi-Builder_landing.html">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+</body>
+</html>

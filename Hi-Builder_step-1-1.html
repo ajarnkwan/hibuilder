@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Step 1.1 — Day 1: สวัสดี Builder · Hi, Builder</title>
+<meta name="description" content="จุดเริ่มต้นของการเป็น Builder · จดหมายจากอาจารย์ขวัญ + roadmap 8 บทเรียน">
+<meta property="og:title" content="Step 1.1 — Day 1: สวัสดี Builder · Hi, Builder">
+<meta property="og:description" content="จุดเริ่มต้นของการเป็น Builder · จดหมายจากอาจารย์ขวัญ + roadmap 8 บทเรียน">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="Hi, Builder">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Step 1.1 — Day 1: สวัสดี Builder · Hi, Builder">
+<meta name="twitter:description" content="จุดเริ่มต้นของการเป็น Builder · จดหมายจากอาจารย์ขวัญ + roadmap 8 บทเรียน">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fafaf7;
+    --cream-deep: #f0eee7;
+    --paper: #ffffff;
+    --letter: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-faded: #8a8479;
+    --terra: #c4521e;
+    --terra-deep: #9a3d12;
+    --terra-soft: #f4d8c8;
+    --moss: #5a6b3d;
+    --rule: #d4cdb8;
+    --highlight: #f4e088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-3deg);
+  }
+  .brand-text { font-weight: 600; letter-spacing: 0.02em; }
+  .brand-text .by { font-size: 0.75rem; color: var(--ink-faded); margin-left: 8px; font-weight: 400; }
+  .topbar-right { font-size: 0.85rem; }
+  .topbar-right a { padding: 6px 12px; border: 1px solid var(--ink); }
+  .topbar-right a:hover { background: var(--ink); color: var(--cream); }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--rule);
+    display: flex;
+  }
+  .progress-bar .seg {
+    flex: 1;
+    border-right: 1px solid var(--cream);
+  }
+  .progress-bar .seg:last-child { border-right: none; }
+  .progress-bar .seg.done { background: var(--terra); }
+  .progress-bar .seg.current { background: var(--terra); }
+
+  .crumb {
+    padding: 18px 24px 0;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .crumb a:hover { color: var(--terra); }
+  .crumb .sep { margin: 0 8px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  .step-header {
+    padding: 48px 0 36px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .step-meta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .step-num-stamp {
+    border: 1.5px solid var(--ink);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--paper);
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .step-time-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+  }
+  .step-time-tag::before { content: "⏱ "; color: var(--terra); }
+  .step-header h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .step-header h1 .day-tag {
+    display: inline-block;
+    background: var(--highlight);
+    padding: 0 10px;
+    margin-right: 6px;
+    transform: rotate(-1deg);
+    font-size: 0.85em;
+  }
+
+  .outcomes-block {
+    margin: 32px 0 48px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .outcomes-block::before {
+    content: "🎯";
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    background: var(--cream);
+    padding: 0 8px;
+    font-size: 1.2rem;
+  }
+  .outcomes-block h3 {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 12px;
+  }
+  .outcomes-block ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .outcomes-block li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .outcomes-block li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--terra);
+    font-weight: 600;
+  }
+
+  .letter-section { margin: 56px 0; }
+  .letter-section .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .letter {
+    background: var(--letter);
+    border: 1px solid var(--ink);
+    padding: 40px 44px;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .letter::before {
+    content: "✉";
+    position: absolute;
+    top: -14px;
+    left: 32px;
+    background: var(--cream);
+    padding: 0 10px;
+    font-size: 1.4rem;
+    color: var(--terra);
+  }
+  .letter-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .letter p {
+    margin-bottom: 18px;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+  .letter p em {
+    font-style: italic;
+    color: var(--terra-deep);
+    font-weight: 500;
+  }
+  .letter p strong {
+    background: var(--highlight);
+    padding: 0 4px;
+    font-weight: 500;
+  }
+  .letter-sign {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+    text-align: right;
+    font-style: italic;
+    font-weight: 500;
+  }
+  @media (max-width: 600px) {
+    .letter { padding: 28px 24px; box-shadow: 3px 3px 0 var(--ink); }
+  }
+
+  .approach { margin: 56px 0; }
+  .approach h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .approach-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 20px 22px;
+  }
+  .approach-card .icon { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+  .approach-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .approach-card p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  @media (max-width: 600px) {
+    .approach-grid { grid-template-columns: 1fr; }
+  }
+
+  .discord {
+    margin: 56px 0;
+    padding: 32px;
+    background: var(--cream-deep);
+    border: 1px solid var(--ink);
+    border-left: 5px solid var(--terra);
+  }
+  .discord h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .discord p { margin-bottom: 14px; color: var(--ink-soft); }
+  .discord .channels {
+    margin: 18px 0;
+    list-style: none;
+  }
+  .discord .channels li {
+    padding: 10px 14px;
+    background: var(--paper);
+    margin-bottom: 6px;
+    border-left: 2px solid var(--rule);
+    font-size: 0.95rem;
+  }
+  .discord .channels code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 2px 8px;
+    margin-right: 8px;
+    font-size: 0.85rem;
+  }
+  .discord .guide-link {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    font-weight: 500;
+    font-size: 0.92rem;
+  }
+  .discord .guide-link:hover { background: var(--ink); color: var(--cream); }
+
+  .action { margin: 56px 0; }
+  .action h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .action h2::before {
+    content: "✓ ";
+    color: var(--moss);
+  }
+  .action-steps {
+    list-style: none;
+    counter-reset: action-counter;
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .action-steps li {
+    counter-increment: action-counter;
+    padding: 18px 24px 18px 64px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .action-steps li::before {
+    content: counter(action-counter);
+    position: absolute;
+    left: 18px;
+    top: 14px;
+    width: 30px;
+    height: 30px;
+    background: var(--terra);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .action-steps a {
+    color: var(--terra);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  .action-steps .sub-list {
+    margin-top: 8px;
+    padding-left: 20px;
+  }
+  .action-steps .sub-list li {
+    background: transparent;
+    border: none;
+    padding: 4px 0 4px 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .action-steps .sub-list li::before {
+    content: "—";
+    position: static;
+    background: transparent;
+    color: var(--terra);
+    width: auto;
+    height: auto;
+    margin-right: 8px;
+    border-radius: 0;
+    display: inline;
+  }
+
+  .verify {
+    margin: 32px 0 56px;
+    padding: 32px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    text-align: center;
+    position: relative;
+  }
+  .verify::before {
+    content: "🔓";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cream);
+    padding: 0 12px;
+    font-size: 1.5rem;
+  }
+  .verify-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 16px;
+  }
+  .verify-input-row {
+    display: flex;
+    gap: 8px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .verify-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1.5px solid var(--ink);
+    background: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+  .verify-input:focus {
+    outline: none;
+    border-color: var(--terra);
+    background: var(--paper);
+  }
+  .verify-btn {
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--cream);
+    border: 1.5px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .verify-btn:hover { background: var(--terra); border-color: var(--terra-deep); }
+  .verify-help {
+    margin-top: 14px;
+    font-size: 0.84rem;
+    color: var(--ink-faded);
+  }
+  @media (max-width: 500px) {
+    .verify-input-row { flex-direction: column; }
+  }
+
+  .why-post {
+    margin: 56px 0;
+    padding: 24px 28px;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+  }
+  .why-post h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--terra);
+  }
+  .why-post p {
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+  }
+
+  /* PREVIEW SECTION — added v2 */
+  .preview-section {
+    margin: 56px 0;
+  }
+  .preview-section .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .preview-section h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .preview-section .section-lead {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  /* Mockup of final product */
+  .preview-product {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--terra);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .preview-product-head {
+    background: var(--cream-deep);
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .preview-product-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rule); }
+  .preview-product-head .url { font-size: 0.78rem; }
+  .preview-product-body {
+    padding: 28px 24px;
+    background: #fafaf3;
+    min-height: 200px;
+  }
+  /* Sample product mockup — looks like a real mini-app */
+  .sample-app h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .sample-app .sample-sub {
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    margin-bottom: 18px;
+  }
+  .sample-checklist {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+  }
+  .sample-checklist li {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 8px 12px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sample-checklist li.checked {
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+  .sample-checklist .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--rule);
+    background: var(--cream);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--moss);
+    font-weight: 700;
+  }
+  .sample-checklist li.checked .check-box {
+    background: var(--moss);
+    color: var(--paper);
+    border-color: var(--moss);
+  }
+  .sample-app-foot {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule);
+    font-size: 0.78rem;
+    color: var(--ink-faded);
+    font-style: italic;
+  }
+  .product-caption {
+    text-align: center;
+    color: var(--ink-faded);
+    font-size: 0.84rem;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .product-caption strong { color: var(--terra-deep); font-style: normal; font-weight: 600; }
+
+  /* Roadmap */
+  .roadmap {
+    background: var(--cream-deep);
+    border: 1px solid var(--ink);
+    padding: 28px 22px;
+  }
+  .roadmap-title {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .roadmap-subtitle {
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .roadmap-list {
+    list-style: none;
+    display: grid;
+    gap: 0;
+    border-left: 2px solid var(--ink);
+    margin-left: 18px;
+    padding-left: 0;
+  }
+  .roadmap-item {
+    position: relative;
+    padding: 10px 0 10px 32px;
+  }
+  .roadmap-stamp {
+    position: absolute;
+    left: -14px;
+    top: 14px;
+    width: 26px;
+    height: 26px;
+    background: var(--cream-deep);
+    border: 1.5px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    transform: rotate(-3deg);
+  }
+  .roadmap-item.flagship .roadmap-stamp {
+    background: var(--terra);
+    color: var(--paper);
+    border-color: var(--terra-deep);
+  }
+  .roadmap-item.final .roadmap-stamp {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .roadmap-name {
+    font-weight: 500;
+    font-size: 0.96rem;
+    color: var(--ink);
+  }
+  .roadmap-milestone {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .roadmap-milestone::before {
+    content: "→ ";
+    color: var(--terra);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .roadmap-flagship-tag {
+    display: inline-block;
+    background: var(--highlight);
+    padding: 1px 6px;
+    margin-left: 8px;
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    transform: rotate(-2deg);
+  }
+
+  .bottom-nav {
+    margin: 56px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    border-top: 2px solid var(--ink);
+  }
+  .nav-link {
+    flex: 1;
+    padding: 18px 22px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    transition: all 0.15s;
+  }
+  .nav-link:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .nav-link .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .nav-link:hover .nav-label { color: var(--cream); }
+  .nav-link .nav-title { font-weight: 500; font-size: 0.95rem; }
+  .nav-link.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    border-style: dashed;
+  }
+  .nav-link.locked:hover {
+    background: transparent;
+    color: var(--ink-faded);
+  }
+  .nav-prev { text-align: left; }
+  .nav-next { text-align: right; }
+
+  footer {
+    margin-top: 80px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--ink);
+    background: var(--cream-deep);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  footer a { color: var(--terra); }
+  footer a:hover { text-decoration: underline; }
+
+  /* === GLOSSARY TOOLTIP === */
+  .g-term {
+    border-bottom: 1px dotted var(--terra);
+    cursor: help;
+    position: relative;
+    color: inherit;
+  }
+  .g-term:hover {
+    border-bottom-color: var(--ink);
+    color: var(--terra-deep);
+  }
+  .g-tip {
+    position: fixed;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 280px;
+    z-index: 100;
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--terra);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s, transform 0.15s;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  }
+  .g-tip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .g-tip strong { color: var(--terra-soft); display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .g-tip a { color: var(--terra-soft); text-decoration: underline; font-size: 0.78rem; display: block; margin-top: 6px; pointer-events: auto; }
+  .g-tip a:hover { color: var(--cream); }
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="brand-mark mono">HB</div>
+    <div class="brand-text">Hi, Builder<span class="by">by อาจารย์ขวัญ</span></div>
+  </div>
+  <div class="topbar-right"><a href="#">เข้าสู่ระบบ</a></div>
+</header>
+
+<div class="progress-bar">
+  <div class="seg current"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+  <div class="seg"></div>
+</div>
+
+<div class="crumb">
+  <a href="#">หน้าหลัก</a><span class="sep">/</span><a href="#">Hi, Builder</a><span class="sep">/</span><a href="Hi-Builder_botreuan-1.html">บทเรียน 1</a><span class="sep">/</span>Step 1.1
+</div>
+
+<div class="wrap">
+
+  <section class="step-header">
+    <div class="step-meta-row">
+      <span class="step-num-stamp">STEP 1.1 / 1.7</span>
+      <span class="step-time-tag">10 นาที</span>
+    </div>
+    <h1><span class="day-tag">Day 1</span><br>สวัสดี Builder</h1>
+  </section>
+
+  <div class="outcomes-block">
+    <h3>จบ Step นี้คุณจะ</h3>
+    <ul>
+      <li>รู้ว่า Hi, Builder พาคุณไปไหน</li>
+      <li>เข้า Discord ของอาจารย์ขวัญได้</li>
+      <li>รู้วิธีปลดล็อก Step ถัดไป</li>
+    </ul>
+  </div>
+
+  <section class="letter-section">
+    <div class="section-label">— จดหมายฉบับแรก —</div>
+    <div class="letter">
+      <div class="letter-title">From: อาจารย์ขวัญ — To: Builder</div>
+      <p>สวัสดี Builder 👋</p>
+      <p>ขอบคุณที่กดเข้ามา</p>
+      <p>อาจารย์เริ่มเขียนคอร์สนี้เพราะตัวเองก็เคยกังวลเหมือนกัน — ตอน AI เริ่มมาแรงๆ อาจารย์ไม่ได้จบสายเทค ไม่ได้เขียนโปรแกรมเป็น ก็คิดสารพัดว่า <em>"แล้วเราจะปรับตัวยังไง"</em> ยิ่งไปกว่านั้น ที่สำคัญคือ <em>"แล้วลูกศิษย์จะอยู่ยังไง!!"</em></p>
+      <p>แต่พอลองเริ่มจริงๆ — ใช้ AI ทำงาน แก้ปัญหาในชีวิต สอนหนังสือ ทำคอนเทนต์ ทำเว็บ — ก็พบว่า <strong>คนที่ได้เปรียบในยุคนี้ไม่ใช่คนเก่งเทคที่สุด แต่คือคนที่กล้าเริ่มก่อน</strong></p>
+      <p>คอร์สนี้ อาจารย์ตั้งใจเอาเส้นทางนั้นมาย่อยให้พวกเรา — ใช้สิ่งที่เรารู้อยู่แล้ว + AI เพื่อสร้างสิ่งที่แก้ปัญหาจริงในชีวิต</p>
+      <p>สิ่งที่เราจะได้เรียนรู้ไม่ใช่เพียงการสั่งงาน AI แต่คือการเริ่มต้นพัฒนาแนวคิดและพัฒนาสิ่งที่จะช่วยแก้ปัญหาจริง โดยมี AI เป็นเครื่องมือ</p>
+      <p>"ของชิ้นแรก" ที่อาจารย์อยากชวนสร้างคือ <strong>เว็บ + แอปบนมือถือ</strong> — เพราะเริ่มง่ายสุด เห็นผลเร็วสุด คนอื่นเข้าถึงได้ทันที (ในอนาคตอาจมี product แบบอื่น แต่เริ่มที่นี่ก่อน)</p>
+      <p>8 บทเรียนนี้ไม่ง่ายทุกตอน — แต่อาจารย์รับประกันว่าพวกเราทำได้ และอาจารย์จะอยู่ตรงนี้ร่วมเดินทางไปกับพวกเรา</p>
+      <p>หวังว่าสิ่งนี้จะเป็นประโยชน์กับทุกคน ไม่มากก็น้อย</p>
+      <div class="letter-sign">— อาจารย์ขวัญ ❤️</div>
+    </div>
+  </section>
+
+  <section class="preview-section">
+    <div class="section-label">— จะได้อะไร เมื่อจบคอร์สนี้ —</div>
+    <h2>ปลายทางของคอร์ส — เว็บแก้ pain ของพวกเรา</h2>
+    <p class="section-lead">ไม่ใช่ความฝันลอย ๆ — แต่คือ <strong>เว็บที่ใช้งานได้จริง</strong> มี <span class="g-term" data-term="term-url">URL</span> ของตัวเอง และเปิดบนมือถือเป็นแอปได้</p>
+
+    <div class="preview-product">
+      <div class="preview-product-head">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">yourname.github.io/checklist</span>
+      </div>
+      <div class="preview-product-body">
+        <div class="sample-app">
+          <h3>🛒 ของต้องซื้อวันนี้</h3>
+          <p class="sample-sub">checklist ของป้านิด · 28 ตุลาคม 2026</p>
+          <ul class="sample-checklist">
+            <li class="checked"><span class="check-box">✓</span>มะม่วงดิบ 2 กก.</li>
+            <li class="checked"><span class="check-box">✓</span>กระเทียม 1 ห่อ</li>
+            <li><span class="check-box"></span>มะนาว 1 กก.</li>
+            <li><span class="check-box"></span>พริกขี้หนู 5 ขีด</li>
+            <li><span class="check-box"></span>น้ำตาลปี๊บ 2 ก้อน</li>
+          </ul>
+          <div class="sample-app-foot">บันทึกอัตโนมัติ · ใช้ได้ออฟไลน์</div>
+        </div>
+      </div>
+    </div>
+    <p class="product-caption">↑ ตัวอย่าง <strong>"เว็บแก้ pain"</strong> ที่ป้านิดสร้างใน <strong>บทเรียน 6</strong> — ใช้แก้ปัญหาลืมของในตลาด (pain ของพวกเรา → เว็บคนละแบบ)</p>
+
+    <div style="margin-top: 18px; padding: 16px 18px; background: var(--cream-deep); border-left: 3px solid var(--terra); font-size: 0.92rem; color: var(--ink-soft);">
+      <strong style="color: var(--ink); display: block; margin-bottom: 4px; font-size: 0.94rem;">📍 จบบทเรียน 1 พวกเราจะได้อะไร?</strong>
+      <strong>เว็บโปรไฟล์ "About me" แรกของตัวเอง</strong> — มี URL จริง ใช้เป็นรากฐานก่อนสร้างเว็บแก้ pain ในบทเรียน 6
+    </div>
+
+    <div class="roadmap" style="margin-top: 36px;">
+      <div class="roadmap-title">— เส้นทาง 8 บทเรียน —</div>
+      <div class="roadmap-subtitle">จากผู้ใช้ สู่ผู้สร้าง</div>
+      <ul class="roadmap-list">
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">01</div>
+          <div class="roadmap-name">แผนที่โลก Tech & <span class="g-term" data-term="term-asset">Asset</span> Mind Map</div>
+          <div class="roadmap-milestone">มี <span class="g-term" data-term="term-url">URL</span> แรกของตัวเองบน GitHub</div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">02</div>
+          <div class="roadmap-name">คุยกับ AI ให้ได้งาน</div>
+          <div class="roadmap-milestone">ใช้ AI เป็น สั่งงานได้จริง</div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">03</div>
+          <div class="roadmap-name">ของที่ใช้ได้ ไม่ใช่แค่เดโม</div>
+          <div class="roadmap-milestone">เข้าใจ "ส่งมอบของจริง"</div>
+        </li>
+        <li class="roadmap-item flagship">
+          <div class="roadmap-stamp">04</div>
+          <div class="roadmap-name">จับโกหก AI (Critical AI) <span class="roadmap-flagship-tag">flagship</span></div>
+          <div class="roadmap-milestone">มี Checklist ตรวจสอบ AI ของตัวเอง</div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">05</div>
+          <div class="roadmap-name">หา Pain ที่ใช้ <span class="g-term" data-term="term-asset">asset</span> แก้ได้</div>
+          <div class="roadmap-milestone">รู้แล้วว่าจะสร้างเว็บแก้ pain อะไร</div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">06</div>
+          <div class="roadmap-name">สร้าง Product ตัวแรก (เว็บแก้ pain)</div>
+          <div class="roadmap-milestone">มีเว็บของตัวเอง ใช้งานได้จริง</div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-stamp">07</div>
+          <div class="roadmap-name">Polish + ทำเว็บให้เป็น App (PWA)</div>
+          <div class="roadmap-milestone">เว็บติดตั้งบนมือถือเหมือนแอปจริง</div>
+        </li>
+        <li class="roadmap-item final">
+          <div class="roadmap-stamp">08</div>
+          <div class="roadmap-name">Demo Day + เส้นทางต่อ</div>
+          <div class="roadmap-milestone">ใบ Cert + <span class="g-term" data-term="term-portfolio">Portfolio</span> พร้อมใช้</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="approach">
+    <h2>แนวทางการเรียน</h2>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <span class="icon">🐢</span>
+        <h3>ช้าได้ ไม่ต้องรีบ</h3>
+        <p>บทเรียน 1 ใช้ 2 วันก็ได้ 2 สัปดาห์ก็ได้ ไม่มีใครจับเวลา เพราะคุณคือ Builder ของตัวเอง</p>
+      </div>
+      <div class="approach-card">
+        <span class="icon">🚪</span>
+        <h3>ตามลำดับ ห้ามแอบข้าม</h3>
+        <p>บทเรียน 6 ใช้ของจาก บทเรียน 1 และ 5 — ข้ามไปก่อนคือเสียเปล่า</p>
+      </div>
+      <div class="approach-card">
+        <span class="icon">🔨</span>
+        <h3>ทำก่อน เข้าใจทีหลัง</h3>
+        <p>อย่ารอ "อ๋อ เข้าใจหมดแล้ว" ค่อยทำ — Builder ไม่ทำงานแบบนั้น ทำเลย ความเข้าใจตามมาเอง</p>
+      </div>
+      <div class="approach-card">
+        <span class="icon">🐛</span>
+        <h3>ติดเป็นเรื่องปกติ</h3>
+        <p>ทุก Builder เคยติด — มี Discord ช่วย มีอาจารย์อยู่ ปัญหาไหนก็ผ่านได้</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="discord">
+    <h2>Discord คืออะไร? ใช้ยังไง?</h2>
+    <p>Discord = แอปแชตสำหรับ community คล้าย Line group แต่แบ่งเป็น <strong>ห้อง (channels)</strong> ตามหัวข้อ ฟรี ใช้ได้ทั้งคอมและมือถือ</p>
+    <p><strong>Discord ของเราเป็นของอาจารย์ขวัญ</strong> — มีหลายคอร์สอยู่ในนั้น Hi, Builder เป็นหนึ่งในนั้น</p>
+    <ul class="channels">
+      <li><code>#welcome</code>แนะนำตัว เริ่มต้นที่นี่</li>
+      <li><code>#hi-builder-ask</code>ติดอะไร ถามได้ทุกเรื่องในคอร์ส</li>
+      <li><code>#hi-builder-showcase</code>โชว์งาน + ดูงานคนอื่น</li>
+      <li><code>#hi-builder-bugs</code>ปัญหาเทคนิค debug ร่วมกัน</li>
+    </ul>
+    <p style="margin-top: 16px;">ยังไม่เคยใช้ Discord? ไม่เป็นไร อาจารย์ทำคู่มือไว้ →</p>
+    <a class="guide-link" href="Hi-Builder_Discord-Guide.md">📘 อ่าน "Discord ฉบับ 5 นาที"</a>
+  </section>
+
+  <section class="action">
+    <h2>Action Item</h2>
+    <ol class="action-steps">
+      <li>เข้า Discord ของอาจารย์ขวัญ → <a href="#">[Discord invite link]</a></li>
+      <li>
+        ไปห้อง <code style="font-family: 'IBM Plex Mono', monospace; background: var(--ink); color: var(--cream); padding: 2px 8px; font-size: 0.88rem;">#welcome</code> แล้วโพสต์ 3 บรรทัด:
+        <ul class="sub-list">
+          <li>คุณคือใคร</li>
+          <li>มาที่นี่เพราะอะไร</li>
+          <li>กังวลเรื่องไหนเกี่ยวกับ AI ที่สุด</li>
+        </ul>
+      </li>
+      <li>Bot จะตอบกลับให้ <strong>"โค้ดต้อนรับ"</strong> → ก๊อปโค้ดนั้นมาวางในกล่องด้านล่าง</li>
+    </ol>
+  </section>
+
+  <div class="verify">
+    <div class="verify-label">โค้ดต้อนรับจาก Discord</div>
+    <div class="verify-input-row">
+      <input type="text" class="verify-input" placeholder="HIBUILDER-XXXXX">
+      <button class="verify-btn">VERIFY</button>
+    </div>
+    <p class="verify-help">Step 1.2 จะปลดล็อกเมื่อใส่โค้ดถูกต้อง</p>
+  </div>
+
+  <section class="why-post">
+    <h3>ทำไมต้องโพสต์ก่อนถึงไปต่อได้?</h3>
+    <p>เพราะการได้ "พูดออกมา" ว่าคุณคือใคร มาทำไม — ทำให้คุณ <span class="g-term" data-term="term-commit">commit</span> กับเส้นทางนี้จริงๆ และคนอื่นใน Discord จะรู้จักคุณตั้งแต่วันแรก ตอนติดอะไรจะมีคนเข้ามาช่วย เพราะรู้ว่าคุณเป็นใคร — ขั้นเล็กๆ ที่สำคัญที่สุดของทั้งคอร์ส</p>
+  </section>
+
+  <nav class="bottom-nav">
+    <a href="Hi-Builder_botreuan-1.html" class="nav-link nav-prev">
+      <div class="nav-label">← กลับ</div>
+      <div class="nav-title">บทเรียน 1 — แผนที่</div>
+    </a>
+    <a href="Hi-Builder_step-1-2.html" class="nav-link nav-next locked">
+      <div class="nav-label">ถัดไป · 🔒</div>
+      <div class="nav-title">Step 1.2 — โลก Tech →</div>
+    </a>
+  </nav>
+
+</div>
+
+<footer>
+  <p>Hi, Builder · ส่วนหนึ่งของ <a href="#">Ajarn.Kwan Self-Learning Centre</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">© 2026 ผศ.ดร.ขวัญ เพชรสว่าง · เนื้อหาฟรีเพื่อการศึกษา</p>
+</footer>
+
+
+<script>
+  // Mini glossary for tooltip previews (short defs only)
+  const GLOSSARY = {
+    'term-html': { name: 'HTML', def: 'ภาษาที่ใช้บอกว่า "เว็บมีอะไร" — โครงกระดูกของหน้าเว็บ' },
+    'term-css': { name: 'CSS', def: 'ภาษาที่ใช้แต่งเว็บให้สวย — สี ฟอนต์ เลย์เอาต์' },
+    'term-js': { name: 'JS (JavaScript)', def: 'ภาษาที่ทำให้เว็บเคลื่อนไหวและตอบโต้' },
+    'term-tag': { name: 'Tag', def: 'ของในวงเล็บมุม <> ที่บอกว่าส่วนนี้คืออะไร — เปิดต้องปิดเป็นคู่' },
+    'term-indexhtml': { name: 'index.html', def: 'ชื่อไฟล์ที่เซิร์ฟเวอร์เปิดเป็นค่าเริ่มต้น — "หน้าแรก" ของเว็บ' },
+    'term-repo': { name: 'Repo (Repository)', def: '"โฟลเดอร์โปรเจกต์" บน GitHub — 1 เว็บ = 1 repo' },
+    'term-commit': { name: 'Commit', def: 'บันทึกการเปลี่ยนแปลงเข้า repo — มี history ดูย้อนได้' },
+    'term-deploy': { name: 'Deploy', def: 'ปล่อยเว็บออกสู่อินเทอร์เน็ต — บน GitHub Pages เกิดอัตโนมัติหลัง commit' },
+    'term-githubpages': { name: 'GitHub Pages', def: 'บริการโฮสต์เว็บฟรีของ GitHub — ใช้ตลอดคอร์ส' },
+    'term-readme': { name: 'README', def: 'ไฟล์คำอธิบายของ repo — ไฟล์แรกที่คนอื่นเห็น' },
+    'term-url': { name: 'URL', def: '"ที่อยู่" ของหน้าเว็บบนอินเทอร์เน็ต' },
+    'term-hosting': { name: 'Hosting', def: 'บริการเก็บไฟล์เว็บบนเซิร์ฟเวอร์ที่เปิด 24 ชั่วโมง' },
+    'term-browser': { name: 'Browser', def: 'โปรแกรมเปิดเว็บ — Chrome, Safari, Edge, Firefox' },
+    'term-localstorage': { name: 'localStorage', def: 'ช่องเก็บข้อมูลในเบราว์เซอร์ — ของไม่หายเมื่อปิดหน้า' },
+    'term-json': { name: 'JSON', def: 'รูปแบบไฟล์เก็บข้อมูลแบบมีโครง — มนุษย์อ่านได้ คอมเข้าใจ' },
+    'term-prompt': { name: 'Prompt', def: 'ข้อความที่พิมพ์/พูดให้ AI — คำสั่ง+คำถาม+บริบท' },
+    'term-asset': { name: 'Asset', def: '"ทุน" ของ Builder — สิ่งที่คุณมีอยู่แล้ว ที่จะใช้สร้างของได้' },
+    'term-portfolio': { name: 'Portfolio', def: 'การรวบรวมผลงาน — ใช้สมัครงาน หาคนซื้อบริการ' }
+  };
+
+  let activeTip = null;
+  function showTip(el, ev) {
+    const id = el.dataset.term;
+    const g = GLOSSARY[id];
+    if (!g) return;
+    if (activeTip) hideTip();
+    const tip = document.createElement('div');
+    tip.className = 'g-tip';
+    tip.innerHTML = `<strong>${g.name}</strong>${g.def}<a href="Hi-Builder_glossary.html#${id}" target="_blank">ดูเต็ม →</a>`;
+    document.body.appendChild(tip);
+    const rect = el.getBoundingClientRect();
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    // adjust if overflow right
+    const tw = 280;
+    if (left + tw > window.innerWidth - 16) left = window.innerWidth - tw - 16;
+    if (left < 16) left = 16;
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    requestAnimationFrame(() => tip.classList.add('show'));
+    activeTip = tip;
+  }
+  function hideTip() {
+    if (!activeTip) return;
+    const t = activeTip;
+    activeTip = null;
+    t.classList.remove('show');
+    setTimeout(() => t.remove(), 150);
+  }
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.g-term');
+    if (t) showTip(t, e);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.g-term');
+    if (t && !e.relatedTarget?.closest('.g-tip')) hideTip();
+  });
+  // Mobile/touch — tap to toggle
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.g-term');
+    if (t) {
+      e.preventDefault();
+      if (activeTip && activeTip.previousMatchEl === t) {
+        hideTip();
+      } else {
+        showTip(t, e);
+        if (activeTip) activeTip.previousMatchEl = t;
+      }
+    } else if (!e.target.closest('.g-tip')) {
+      hideTip();
+    }
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
+</script>
+
+</body>
+</html>
